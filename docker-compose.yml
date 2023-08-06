@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  api:
+    image: webdevops/php-apache:8.2
+    container_name: metro
+    ports:
+      - "8080:80"
+    environment:
+      - WEB_DOCUMENT_ROOT=/var/www/public
+      - WEB_DOCUMENT_INDEX=index.php
+      - VIRTUAL_HOST=metro.local
+    expose:
+      - 80
+    volumes:
+      - ./:/var/www
+      - tmp:/tmp
+  mysql:
+    image: mysql:8.1
+    container_name: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+
+volumes:
+  mysql_data:
+  tmp:
