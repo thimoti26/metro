@@ -17,8 +17,13 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Shared/Orm/Entity/'
             - '../src/Kernel.php'
+
+    Symfony\Component\Serializer\Debug\TraceableSerializer:
+        arguments:
+            $serializer: '@App\Shared\Symfony\Serializer\Serializer'
+            $dataCollector: '@serializer.data_collector'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

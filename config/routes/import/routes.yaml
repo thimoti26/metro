@@ -1,0 +1,4 @@
+get:
+    path: /api/import
+    controller: App\ImportBoundedContext\Application\Controller\ImportController::getAction
+    methods: GET
