@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Shared\Orm\Repository;
+declare(strict_types=1);
+
+namespace App\ImportBoundedContext\Infrastructure\Repository;
 
 use App\Shared\Orm\Entity\ConnexionEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -22,7 +24,7 @@ class ConnexionEntityRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return ConnexionEntity[] Returns an array of ConnexionEntity objects
+//     * @return Connexion[] Returns an array of Connexion objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +38,7 @@ class ConnexionEntityRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ConnexionEntity
+//    public function findOneBySomeField($value): ?Connexion
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

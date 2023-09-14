@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Shared\Orm\Repository;
+declare(strict_types=1);
+
+namespace App\ImportBoundedContext\Infrastructure\Repository;
 
 use App\Shared\Orm\Entity\LigneEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -22,7 +24,7 @@ class LigneEntityRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return LigneEntity[] Returns an array of LigneEntity objects
+//     * @return Ligne[] Returns an array of Ligne objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +38,7 @@ class LigneEntityRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?LigneEntity
+//    public function findOneBySomeField($value): ?Ligne
 //    {
 //        return $this->createQueryBuilder('l')
 //            ->andWhere('l.exampleField = :val')

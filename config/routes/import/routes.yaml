@@ -1,4 +1,19 @@
-get:
-    path: /api/import
-    controller: App\ImportBoundedContext\Application\Controller\ImportController::getAction
+import.gare:
+    path: /api/import/gare/filepath/{filePath}
+    controller: App\ImportBoundedContext\Application\Controller\Import\GetGareController
     methods: GET
+    requirements:
+        filePath: .+
+import.ligne:
+    path: /api/import/ligne/filepath/{filePath}
+    controller: App\ImportBoundedContext\Application\Controller\Import\GetLigneController
+    methods: GET
+import.connexion:
+    path: /api/import/connexion/filepath/{filePath}
+    controller: App\ImportBoundedContext\Application\Controller\Import\GetConnexionController
+    methods: GET
+import.all:
+    path: /api/import/all/gare/filepath/{gareFilePath}/ligne/filepath/{ligneFilePath}/connexion/filepath/{connexionFilePath}
+    controller: App\ImportBoundedContext\Application\Controller\Import\GetAllController
+    methods: GET
+

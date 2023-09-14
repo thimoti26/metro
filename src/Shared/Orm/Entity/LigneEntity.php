@@ -1,80 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Orm\Entity;
 
-use App\Shared\Orm\Repository\LigneEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Repository\LigneEntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: LigneEntityRepository::class)]
-class LigneEntity
+class LigneEntity implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    protected ?string $name = null;
 
     #[ORM\Column]
-    private ?float $speed = null;
+    protected ?float $speed = null;
 
     #[ORM\Column]
-    private ?float $spacing = null;
+    protected ?float $spacing = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $color = null;
+    protected ?string $color = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
+    /**
+     * @return float|null
+     */
     public function getSpeed(): ?float
     {
         return $this->speed;
     }
 
-    public function setSpeed(float $speed): static
-    {
-        $this->speed = $speed;
-
-        return $this;
-    }
-
+    /**
+     * @return float|null
+     */
     public function getSpacing(): ?float
     {
         return $this->spacing;
     }
 
-    public function setSpacing(float $spacing): static
-    {
-        $this->spacing = $spacing;
-
-        return $this;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getColor(): ?string
     {
         return $this->color;
-    }
-
-    public function setColor(string $color): static
-    {
-        $this->color = $color;
-
-        return $this;
     }
 }

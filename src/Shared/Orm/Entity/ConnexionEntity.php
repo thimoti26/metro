@@ -1,68 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Shared\Orm\Entity;
 
-use App\Shared\Orm\Repository\ConnexionEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Repository\ConnexionEntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConnexionEntityRepository::class)]
-class ConnexionEntity
+class ConnexionEntity implements EntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    protected ?int $id = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?LigneEntity $ligne = null;
+    protected ?LigneEntity $ligne = null;
 
     #[ORM\ManyToOne(inversedBy: 'arrive')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GareEntity $depart = null;
+    protected ?GareEntity $depart = null;
 
     #[ORM\ManyToOne(inversedBy: 'arrives')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?GareEntity $arrive = null;
+    protected ?GareEntity $arrive = null;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return LigneEntity|null
+     */
     public function getLigne(): ?LigneEntity
     {
         return $this->ligne;
     }
 
-    public function setLigne(?LigneEntity $ligne): static
-    {
-        $this->ligne = $ligne;
-
-        return $this;
-    }
-
+    /**
+     * @return GareEntity|null
+     */
     public function getDepart(): ?GareEntity
     {
         return $this->depart;
     }
 
-    public function setDepart(?GareEntity $depart): static
-    {
-        $this->depart = $depart;
-
-        return $this;
-    }
-
+    /**
+     * @return GareEntity|null
+     */
     public function getArrive(): ?GareEntity
     {
         return $this->arrive;
-    }
-
-    public function setArrive(?GareEntity $arrive): static
-    {
-        $this->arrive = $arrive;
-
-        return $this;
     }
 }

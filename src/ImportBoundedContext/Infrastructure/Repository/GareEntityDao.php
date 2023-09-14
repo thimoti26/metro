@@ -1,7 +1,13 @@
 <?php
 
-namespace App\Shared\Orm\Repository;
+declare(strict_types=1);
 
+namespace App\ImportBoundedContext\Infrastructure\Repository;
+
+use App\ImportBoundedContext\Domain\Model\Gare\Gare;
+use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
+use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
+use App\ImportBoundedContext\Domain\Repository\GareDaoInterface;
 use App\Shared\Orm\Entity\GareEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -14,7 +20,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method GareEntity[]    findAll()
  * @method GareEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GareEntityRepository extends ServiceEntityRepository
+class GareEntityDao extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -22,7 +28,7 @@ class GareEntityRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return GareEntity[] Returns an array of GareEntity objects
+//     * @return Gare[] Returns an array of Gare objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +42,7 @@ class GareEntityRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?GareEntity
+//    public function findOneBySomeField($value): ?Gare
 //    {
 //        return $this->createQueryBuilder('g')
 //            ->andWhere('g.exampleField = :val')
@@ -45,4 +51,18 @@ class GareEntityRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findOneById(GareIdValueObject $gareIdValueObject): Gare
+    {
+        // TODO: Implement findOneById() method.
+    }
+
+    public function persistCollection(GareArrayObject $gareArrayObject): GareArrayObject
+    {
+        // TODO: Implement persistCollection() method.
+    }
+
+    public function persist(Gare $gare): Gare
+    {
+        // TODO: Implement persist() method.
+    }
 }
