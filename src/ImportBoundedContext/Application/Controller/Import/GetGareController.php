@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
-use App\ImportBoundedContext\Application\CQRS\FindGareByFileNameQuery;
+use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
+use App\ImportBoundedContext\Application\ViewModel\GareArrayViewModel;
 
 class GetGareController extends AbstractController
 {
@@ -25,7 +26,6 @@ class GetGareController extends AbstractController
     {
         $this->messageBus = $messageBus;
     }
-
 
     /**
      * @OA\Tag(name="import")
@@ -41,7 +41,7 @@ class GetGareController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="test",
-     *     @Model(type=App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject::class)
+     *     @Model(type=GareArrayViewModel::class, groups={"default"})
      * )
      *
      * @param string $filePath
@@ -49,7 +49,6 @@ class GetGareController extends AbstractController
      */
     public function __invoke(string $filePath): Response
     {
-
         $gares = $this->handle(new FindGareByFileNameQuery(new FileNameValueObject($filePath)));
 
         return JsonResponse::fromJsonString($gares);

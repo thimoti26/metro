@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Infrastructure\DAO;
 
-use App\ImportBoundedContext\Domain\Dao\GareFileDaoInterface;
+use App\ImportBoundedContext\Domain\Dao\ConnexionFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
-use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Infrastructure\Exception\FileNotFoundException;
 use ErrorException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-readonly class GareFileDao implements GareFileDaoInterface
+readonly class ConnexionFileDao implements ConnexionFileDaoInterface
 {
     /**
      * @param SerializerInterface $serializer
@@ -27,16 +27,16 @@ readonly class GareFileDao implements GareFileDaoInterface
 
     /**
      * @param FileNameValueObject $fileNameValueObject
-     * @return GareArrayObject
+     * @return ConnexionArrayObject
      * @throws FileNotFoundException
      */
-    public function findAllByFileName(FileNameValueObject $fileNameValueObject): GareArrayObject
+    public function findAllByFileName(FileNameValueObject $fileNameValueObject): ConnexionArrayObject
     {
         try {
-        $fp = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+            $fp = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }
-        return $this->serializer->deserialize($fp, GareArrayObject::class, 'csv', ['csv_delimiter' => ';']);
+        return $this->serializer->deserialize($fp, ConnexionArrayObject::class, 'csv', ['csv_delimiter' => ';']);
     }
 }

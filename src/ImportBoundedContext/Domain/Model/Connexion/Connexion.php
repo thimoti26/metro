@@ -12,13 +12,13 @@ use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 class Connexion
 {
     /** @var ConnexionIdValueObject|null */
-    private ?ConnexionIdValueObject $id;
+    protected ?ConnexionIdValueObject $id;
     /** @var LigneIdValueObject */
-    private LigneIdValueObject $ligne;
+    protected LigneIdValueObject $ligne;
     /** @var GareIdValueObject */
-    private GareIdValueObject $depart;
+    protected GareIdValueObject $depart;
     /** @var GareIdValueObject */
-    private GareIdValueObject $arrive;
+    protected GareIdValueObject $arrive;
 
     /**
      * @param ConnexionIdValueObject|null $id

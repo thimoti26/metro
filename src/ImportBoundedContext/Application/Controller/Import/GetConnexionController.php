@@ -4,44 +4,53 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
-use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
-use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
-use App\ImportBoundedContext\Domain\Service\ImportService;
+use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
+use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 
 class GetConnexionController extends AbstractController
 {
+    use HandleTrait;
 
-    public function __construct(
-        private readonly SerializerInterface $serializer,
-        private readonly ImportService $importService,
-        private readonly EventDispatcherInterface $eventDispatcher
-    )
+    /**
+     * @param MessageBusInterface $messageBus
+     */
+    public function __construct(MessageBusInterface $messageBus)
     {
+        $this->messageBus = $messageBus;
     }
 
     /**
      * @OA\Tag(name="import")
+     * @OA\Parameter(
+     *     name="filePath",
+     *     in="path",
+     *      @OA\Schema(
+     *          type="string"
+     *      ),
+     *     example="connexions.csv",
+     *     description="connexion file path."
+     * )
      * @OA\Response(
      *     response=200,
      *     description="test",
-     *     @Model(type=App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject::class)
+     *     @Model(type=ConnexionArrayObject::class)
      * )
      *
+     * @param string $filePath
      * @return Response
      */
-    public function __invoke(): Response
+    public function __invoke(string $filePath): Response
     {
-        $fp = file_get_contents('../Resources/connexions.csv', true);
-        $connexions = $this->serializer->deserialize($fp, ConnexionArrayObject::class, 'csv', ['csv_delimiter' => ';']);
-        $this->importService->importConnexion($connexions);
+        $gares = $this->handle(new FindConnexionByFileNameQuery(new FileNameValueObject($filePath)));
 
-        return new Response();
+        return JsonResponse::fromJsonString($gares);
     }
 }

@@ -20,49 +20,22 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method GareEntity[]    findAll()
  * @method GareEntity[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GareEntityDao extends ServiceEntityRepository
+class GareEntityRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GareEntity::class);
     }
 
-//    /**
-//     * @return Gare[] Returns an array of Gare objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('g.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Gare
-//    {
-//        return $this->createQueryBuilder('g')
-//            ->andWhere('g.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
-    public function findOneById(GareIdValueObject $gareIdValueObject): Gare
-    {
-        // TODO: Implement findOneById() method.
-    }
-
     public function persistCollection(GareArrayObject $gareArrayObject): GareArrayObject
     {
         // TODO: Implement persistCollection() method.
+        return $gareArrayObject;
     }
 
     public function persist(Gare $gare): Gare
     {
         // TODO: Implement persist() method.
+        return $gare;
     }
 }

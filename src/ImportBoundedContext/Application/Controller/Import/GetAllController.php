@@ -4,51 +4,49 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
-use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
-use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
-use App\ImportBoundedContext\Domain\Service\ImportService;
+use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
+use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
+use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
+use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
-use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Messenger\HandleTrait;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class GetAllController extends AbstractController
 {
+    use HandleTrait;
 
-    public function __construct(
-        private readonly SerializerInterface $serializer,
-        private readonly ImportService $importService,
-        private readonly EventDispatcherInterface $eventDispatcher
-    )
+    /**
+     * @param MessageBusInterface $messageBus
+     */
+    public function __construct(MessageBusInterface $messageBus)
     {
+        $this->messageBus = $messageBus;
     }
 
     /**
      * @OA\Tag(name="import")
      * @OA\Response(
      *     response=200,
-     *     description="test",
-     *     @Model(type=App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject::class)
+     *     description="200 if ok"
      * )
      *
      * @return Response
      */
     public function __invoke(): Response
     {
-        $fp = file_get_contents('../Resources/gares.csv', true);
-        $gares = $this->serializer->deserialize($fp, GareArrayObject::class, 'csv', ['csv_delimiter' => ';']);
-        $this->importService->importGares($gares);
+        $gareQuery       = new FindGareByFileNameQuery(new FileNameValueObject('Resources/gares.csv'));
+        $ligneQuery      = new FindLigneByFileNameQuery(new FileNameValueObject('Resources/lignes.csv'));
+        $connexionQuery  = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
 
-        $fp = file_get_contents('../Resources/lignes.csv', true);
-        $lignes = $this->serializer->deserialize($fp, LigneArrayObject::class, 'csv', ['csv_delimiter' => ';']);
-        $this->importService->importLignes($lignes);
 
-        $fp = file_get_contents('../Resources/connexions.csv', true);
-        $connexions = $this->serializer->deserialize($fp, ConnexionArrayObject::class, 'csv', ['csv_delimiter' => ';']);
-        $this->importService->importConnexion($connexions);
+        $this->handle($gareQuery);
+        $this->handle($ligneQuery);
+        $this->handle($connexionQuery);
 
         return new Response();
     }

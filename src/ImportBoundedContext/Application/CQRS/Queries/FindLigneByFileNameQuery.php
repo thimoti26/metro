@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\ImportBoundedContext\Application\CQRS;
+namespace App\ImportBoundedContext\Application\CQRS\Queries;
 
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\Shared\Application\CQRS\Query;
 
-final class FindGareByFileNameQuery implements Query
+final class FindLigneByFileNameQuery implements Query
 {
     /**
      * @var FileNameValueObject

@@ -7,15 +7,15 @@ namespace App\ImportBoundedContext\Domain\Model\Ligne;
 class Ligne
 {
     /** @var LigneIdValueObject|null */
-    private ?LigneIdValueObject $id;
+    protected ?LigneIdValueObject $id;
     /** @var string */
-    private string $nom;
+    protected string $nom;
     /** @var float */
-    private float $vitesse;
+    protected float $vitesse;
     /** @var float */
-    private float $intervalle;
+    protected float $intervalle;
     /** @var string */
-    private string $couleur;
+    protected string $couleur;
 
     /**
      * @param LigneIdValueObject|null $id

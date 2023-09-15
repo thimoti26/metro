@@ -9,18 +9,18 @@ use App\ImportBoundedContext\Domain\Dao\GareFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Gare\Gare;
 use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
 use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
-use App\ImportBoundedContext\Infrastructure\Repository\GareEntityDao;
+use App\ImportBoundedContext\Infrastructure\Repository\GareEntityRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class GareDatabaseDao implements GareDatabaseDaoInterface
 {
     /**
-     * @param GareEntityDao $gareEntityRepository
+     * @param GareEntityRepository $gareEntityRepository
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        private GareEntityDao       $gareEntityRepository,
-        private SerializerInterface $serializer
+        private GareEntityRepository $gareEntityRepository,
+        private SerializerInterface  $serializer
     )
     {
     }
@@ -31,6 +31,8 @@ readonly class GareDatabaseDao implements GareDatabaseDaoInterface
      */
     public function persistCollection(GareArrayObject $gareArrayObject): GareArrayObject
     {
+        // TODO: Implement persistCollection() method.
+        return $gareArrayObject;
     }
 
     /**
@@ -40,6 +42,7 @@ readonly class GareDatabaseDao implements GareDatabaseDaoInterface
     public function findOneById(GareIdValueObject $gareIdValueObject): Gare
     {
         // TODO: Implement findOneById() method.
+        return new Gare($gareIdValueObject, 'nom', 2, 2);
     }
 
     /**
@@ -49,5 +52,6 @@ readonly class GareDatabaseDao implements GareDatabaseDaoInterface
     public function persist(Gare $gare): Gare
     {
         // TODO: Implement persist() method.
+        return $gare;
     }
 }

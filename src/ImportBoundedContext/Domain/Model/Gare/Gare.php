@@ -8,13 +8,13 @@ use App\Shared\Domain\Model\Entity;
 class Gare implements Entity
 {
     /** @var GareIdValueObject|null */
-    private ?GareIdValueObject $id;
+    protected ?GareIdValueObject $id;
     /** @var string */
-    private string $nom;
+    protected string $nom;
     /** @var float */
-    private float $longitude;
+    protected float $longitude;
     /** @var float */
-    private float $latitude;
+    protected float $latitude;
 
     /**
      * @param GareIdValueObject|null $id
