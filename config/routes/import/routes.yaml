@@ -8,10 +8,14 @@ import.ligne:
     path: /api/import/ligne/filepath/{filePath}
     controller: App\ImportBoundedContext\Application\Controller\Import\GetLigneController
     methods: GET
+    requirements:
+        filePath: .+
 import.connexion:
     path: /api/import/connexion/filepath/{filePath}
     controller: App\ImportBoundedContext\Application\Controller\Import\GetConnexionController
     methods: GET
+    requirements:
+        filePath: .+
 import.all:
     path: /api/import/all/gare/filepath/{gareFilePath}/ligne/filepath/{ligneFilePath}/connexion/filepath/{connexionFilePath}
     controller: App\ImportBoundedContext\Application\Controller\Import\GetAllController
