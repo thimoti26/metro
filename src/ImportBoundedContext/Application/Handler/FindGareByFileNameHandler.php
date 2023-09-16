@@ -6,6 +6,7 @@ namespace App\ImportBoundedContext\Application\Handler;
 
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Domain\Dao\GareFileDaoInterface;
+use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
 use App\Shared\Application\CQRS\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -14,20 +15,18 @@ use Symfony\Component\Serializer\SerializerInterface;
 final class FindGareByFileNameHandler extends QueryHandler
 {
     public function __construct(
-        private readonly GareFileDaoInterface $gareDao,
-        private readonly SerializerInterface $serializer
+        private readonly GareFileDaoInterface $gareDao
     )
     {
     }
 
     /**
      * @param FindGareByFileNameQuery $fileNameQuery
-     * @return string
+     * @return GareArrayObject
      */
-    public function __invoke(FindGareByFileNameQuery $fileNameQuery): string
+    public function __invoke(FindGareByFileNameQuery $fileNameQuery): GareArrayObject
     {
         $fileName = $fileNameQuery->getFilename();
-        $gares = $this->gareDao->findAllByFileName($fileName);
-        return $this->serializer->serialize($gares, 'json');
+        return $this->gareDao->findAllByFileName($fileName);
     }
 }

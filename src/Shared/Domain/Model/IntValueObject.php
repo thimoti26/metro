@@ -18,6 +18,14 @@ abstract class IntValueObject implements ValueObject
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->value;
+    }
+
+    /**
      * @return int
      */
     public function getValue(): int

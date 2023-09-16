@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistGareArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -14,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class GetConnexionController extends AbstractController
 {
@@ -21,8 +24,12 @@ class GetConnexionController extends AbstractController
 
     /**
      * @param MessageBusInterface $messageBus
+     * @param SerializerInterface $serializer
      */
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(
+        MessageBusInterface $messageBus,
+        private readonly SerializerInterface $serializer
+    )
     {
         $this->messageBus = $messageBus;
     }
@@ -49,8 +56,10 @@ class GetConnexionController extends AbstractController
      */
     public function __invoke(string $filePath): Response
     {
-        $gares = $this->handle(new FindConnexionByFileNameQuery(new FileNameValueObject($filePath)));
+        $connexions = $this->handle(new FindConnexionByFileNameQuery(new FileNameValueObject($filePath)));
 
-        return JsonResponse::fromJsonString($gares);
+        $this->handle(new PersistConnexionArrayCommand($connexions));
+
+        return JsonResponse::fromJsonString($this->serializer->serialize($connexions, 'json'));
     }
 }

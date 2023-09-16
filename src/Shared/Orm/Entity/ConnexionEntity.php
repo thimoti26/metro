@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Shared\Orm\Entity;
 
-use App\ImportBoundedContext\Infrastructure\Repository\ConnexionEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ConnexionEntityRepository::class)]
+#[ORM\Entity(repositoryClass: ConnexionRepository::class)]
 class ConnexionEntity implements EntityInterface
 {
     #[ORM\Id]

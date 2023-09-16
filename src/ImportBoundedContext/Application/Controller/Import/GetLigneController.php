@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\ImportBoundedContext\Application\ViewModel\LigneArrayViewModel;
+use Symfony\Component\Serializer\SerializerInterface;
 
 
 class GetLigneController extends AbstractController
@@ -22,8 +23,12 @@ class GetLigneController extends AbstractController
 
     /**
      * @param MessageBusInterface $messageBus
+     * @param SerializerInterface $serializer
      */
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(
+        MessageBusInterface $messageBus,
+        private readonly SerializerInterface $serializer
+    )
     {
         $this->messageBus = $messageBus;
     }

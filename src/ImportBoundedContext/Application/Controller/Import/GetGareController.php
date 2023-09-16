@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistGareArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\ImportBoundedContext\Application\ViewModel\GareArrayViewModel;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class GetGareController extends AbstractController
 {
@@ -21,8 +23,12 @@ class GetGareController extends AbstractController
 
     /**
      * @param MessageBusInterface $messageBus
+     * @param SerializerInterface $serializer
      */
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(
+        MessageBusInterface $messageBus,
+        private readonly SerializerInterface $serializer
+    )
     {
         $this->messageBus = $messageBus;
     }
@@ -51,6 +57,8 @@ class GetGareController extends AbstractController
     {
         $gares = $this->handle(new FindGareByFileNameQuery(new FileNameValueObject($filePath)));
 
-        return JsonResponse::fromJsonString($gares);
+        $this->handle(new PersistGareArrayCommand($gares));
+
+        return JsonResponse::fromJsonString($this->serializer->serialize($gares, 'json'));
     }
 }

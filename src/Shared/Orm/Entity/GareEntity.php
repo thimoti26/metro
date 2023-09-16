@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Shared\Orm\Entity;
 
-use App\ImportBoundedContext\Infrastructure\Repository\GareEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Orm\Repository\GareRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GareEntityRepository::class)]
+#[ORM\Entity(repositoryClass: GareRepository::class)]
 class GareEntity implements EntityInterface
 {
     #[ORM\Id]

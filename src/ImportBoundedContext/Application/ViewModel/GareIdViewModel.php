@@ -9,13 +9,13 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @OA\Schema(type="string")
+ * @OA\Schema(type="int")
  */
 class GareIdViewModel extends GareIdValueObject
 {
     /**
      * @Groups({"default"})
-     * @var string
+     * @var int
      */
-    protected string $value;
+    protected int $value;
 }

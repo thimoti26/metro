@@ -10,18 +10,18 @@ use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionIdValueObject;
 use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
-use App\ImportBoundedContext\Infrastructure\Repository\ConnexionEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface
 {
     /**
-     * @param ConnexionEntityRepository $connexionEntityRepository
+     * @param ConnexionRepository $connexionEntityRepository
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        private ConnexionEntityRepository $connexionEntityRepository,
-        private SerializerInterface  $serializer
+        private ConnexionRepository $connexionEntityRepository,
+        private SerializerInterface $serializer
     )
     {
     }

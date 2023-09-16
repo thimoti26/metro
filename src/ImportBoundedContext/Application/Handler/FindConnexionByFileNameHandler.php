@@ -6,6 +6,7 @@ namespace App\ImportBoundedContext\Application\Handler;
 
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Domain\Dao\ConnexionFileDaoInterface;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\Shared\Application\CQRS\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -14,20 +15,18 @@ use Symfony\Component\Serializer\SerializerInterface;
 final class FindConnexionByFileNameHandler extends QueryHandler
 {
     public function __construct(
-        private readonly ConnexionFileDaoInterface $connexionDao,
-        private readonly SerializerInterface $serializer
+        private readonly ConnexionFileDaoInterface $connexionDao
     )
     {
     }
 
     /**
      * @param FindConnexionByFileNameQuery $fileNameQuery
-     * @return string
+     * @return ConnexionArrayObject
      */
-    public function __invoke(FindConnexionByFileNameQuery $fileNameQuery): string
+    public function __invoke(FindConnexionByFileNameQuery $fileNameQuery): ConnexionArrayObject
     {
         $fileName = $fileNameQuery->getFilename();
-        $connexions = $this->connexionDao->findAllByFileName($fileName);
-        return $this->serializer->serialize($connexions, 'json');
+        return $this->connexionDao->findAllByFileName($fileName);
     }
 }

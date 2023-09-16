@@ -8,18 +8,18 @@ use App\ImportBoundedContext\Domain\Dao\LigneDatabaseDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
-use App\ImportBoundedContext\Infrastructure\Repository\LigneEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Orm\Repository\LigneRepository;
 use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
 {
     /**
-     * @param LigneEntityRepository $ligneEntityRepository
+     * @param LigneRepository $ligneEntityRepository
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        private LigneEntityRepository $ligneEntityRepository,
-        private SerializerInterface  $serializer
+        private LigneRepository     $ligneEntityRepository,
+        private SerializerInterface $serializer
     )
     {
     }

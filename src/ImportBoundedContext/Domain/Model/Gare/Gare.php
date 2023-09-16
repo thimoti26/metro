@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Domain\Model\Gare;
+
 use App\Shared\Domain\Model\Entity;
 
 class Gare implements Entity

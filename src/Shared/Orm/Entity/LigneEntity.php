@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Shared\Orm\Entity;
 
-use App\ImportBoundedContext\Infrastructure\Repository\LigneEntityRepository;
+use App\ImportBoundedContext\Infrastructure\Orm\Repository\LigneRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: LigneEntityRepository::class)]
+#[ORM\Entity(repositoryClass: LigneRepository::class)]
 class LigneEntity implements EntityInterface
 {
     #[ORM\Id]
