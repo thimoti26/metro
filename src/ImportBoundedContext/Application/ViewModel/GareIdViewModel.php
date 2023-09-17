@@ -9,7 +9,7 @@ use OpenApi\Annotations as OA;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @OA\Schema(type="int")
+ * @OA\Schema(type="integer")
  */
 class GareIdViewModel extends GareIdValueObject
 {
