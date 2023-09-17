@@ -6,17 +6,16 @@ namespace App\ImportBoundedContext\Infrastructure\DAO;
 
 use App\ImportBoundedContext\Domain\Dao\ConnexionFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Connexion\Connexion;
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionIdValueObject;
-use App\ImportBoundedContext\Domain\Model\Gare\Gare;
-use App\ImportBoundedContext\Infrastructure\Model\Connexion\Connexion as ConnexionInfra;
-use App\ImportBoundedContext\Infrastructure\Model\Connexion\ConnexionArrayObject as ConnexionArrayInfra;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
+use App\ImportBoundedContext\Domain\Model\Gare\Gare;
 use App\ImportBoundedContext\Infrastructure\Exception\FileNotFoundException;
+use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\Connexion as ConnexionInfra;
+use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\ConnexionArrayObject as ConnexionArrayInfra;
 use App\Shared\Exception\InvalidCollectionParameterException;
 use ErrorException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Serializer\SerializerInterface;
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 
 readonly class ConnexionFileDao implements ConnexionFileDaoInterface
 {

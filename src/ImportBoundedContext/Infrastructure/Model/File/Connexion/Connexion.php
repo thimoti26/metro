@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\ImportBoundedContext\Infrastructure\Model\Connexion;
+namespace App\ImportBoundedContext\Infrastructure\Model\File\Connexion;
 
 class Connexion
 {
