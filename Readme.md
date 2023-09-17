@@ -32,7 +32,7 @@ src
 │   │   │   ├── PersistConnexionCollectionHandler.php
 │   │   │   ├── PersistGareCollectionHandler.php
 │   │   │   └── PersistLigneCollectionHandler.php
-│   │   └── ViewModel // Héritent des entités et les surchagent avec des métadatas pour la doc
+│   │   └── ViewModel // Héritent des entités et les surchagent avec des métadatas pour la doc (Aggregate)
 │   │       ├── ConnexionArrayViewModel.php
 │   │       ├── ConnexionIdViewModel.php
 │   │       ├── ConnexionViewModel.php
@@ -50,7 +50,7 @@ src
 │   │   │   ├── GareFileDaoInterface.php
 │   │   │   ├── LigneDatabaseDaoInterface.php
 │   │   │   └── LigneFileDaoInterface.php
-│   │   └── Model // Entités
+│   │   └── Model // Root Entities
 │   │       ├── Connexion
 │   │       │   ├── Connexion.php
 │   │       │   ├── ConnexionArrayObject.php
@@ -75,9 +75,9 @@ src
 │       │   └── LigneFileDao.php
 │       ├── Exception // Liste des exceptions de l'infra
 │       │   └── FileNotFoundException.php
-│       ├── Model // Changement du modèle pour la source de donnée
+│       ├── Model // Changement du modèle pour la source de donnée 
 │       │   └── File // Pour la source file
-│       │       └── Connexion // Création du modèle pour la connexion
+│       │       └── Connexion // Aggrègate modèle Connexion pour matcher avec le DAO File Connexion
 │       │           ├── Connexion.php
 │       │           ├── ConnexionArrayObject.php
 │       │           └── ConnexionIdValueObject.php
