@@ -20,7 +20,7 @@ readonly class LigneFileDao implements LigneFileDaoInterface
      */
     public function __construct(
         private SerializerInterface $serializer,
-        private KernelInterface $kernel
+        private KernelInterface     $kernel
     )
     {
     }
@@ -33,7 +33,7 @@ readonly class LigneFileDao implements LigneFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): LigneArrayObject
     {
         try {
-        $fileData = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+            $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }

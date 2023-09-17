@@ -20,7 +20,7 @@ readonly class GareFileDao implements GareFileDaoInterface
      */
     public function __construct(
         private SerializerInterface $serializer,
-        private KernelInterface $kernel
+        private KernelInterface     $kernel
     )
     {
     }
@@ -33,7 +33,7 @@ readonly class GareFileDao implements GareFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): GareArrayObject
     {
         try {
-        $fileData = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+            $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }

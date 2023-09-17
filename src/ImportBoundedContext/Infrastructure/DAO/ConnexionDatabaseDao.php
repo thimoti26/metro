@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Infrastructure\DAO;
 
 use App\ImportBoundedContext\Domain\Dao\ConnexionDatabaseDaoInterface;
-use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
-use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\Connexion;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionIdValueObject;
+use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
+use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository;
 
 readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface

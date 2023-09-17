@@ -27,9 +27,9 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
      */
     public function __construct(
         private SerializerInterface $serializer,
-        private KernelInterface $kernel,
-        private LigneDatabaseDao $ligneDatabaseDao,
-        private GareDatabaseDao $gareDatabaseDao
+        private KernelInterface     $kernel,
+        private LigneDatabaseDao    $ligneDatabaseDao,
+        private GareDatabaseDao     $gareDatabaseDao
     )
     {
     }
@@ -42,7 +42,7 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): ConnexionArrayObject
     {
         try {
-            $fileData = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+            $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }

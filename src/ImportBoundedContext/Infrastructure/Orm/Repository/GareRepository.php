@@ -54,6 +54,17 @@ class GareRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param Gare $gare
+     * @return Gare
+     */
+    public function persist(Gare $gare): Gare
+    {
+        $this->getEntityManager()->persist($gare);
+        $this->getEntityManager()->flush();
+        return $gare;
+    }
+
+    /**
      * @return GareArrayObject
      * @throws InvalidCollectionParameterException
      */
@@ -65,16 +76,5 @@ class GareRepository extends ServiceEntityRepository
             $gareArrayObject->append($gare);
         }
         return $gareArrayObject;
-    }
-
-    /**
-     * @param Gare $gare
-     * @return Gare
-     */
-    public function persist(Gare $gare): Gare
-    {
-        $this->getEntityManager()->persist($gare);
-        $this->getEntityManager()->flush();
-        return $gare;
     }
 }

@@ -9,7 +9,6 @@ use App\ImportBoundedContext\Domain\Dao\GareFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
 use App\Shared\Application\CQRS\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsMessageHandler]
 final class FindGareByFileNameHandler extends QueryHandler

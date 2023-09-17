@@ -46,13 +46,14 @@ abstract class ArrayObject extends BaseArrayObject
     /**
      * Enforce collection type
      * @param mixed $value
-     * @throws InvalidCollectionParameterException
      * @return void
+     * @throws InvalidCollectionParameterException
      */
-    public function append(mixed $value): void {
-        if(!($value instanceof $this->collectionClassType)) {
+    public function append(mixed $value): void
+    {
+        if (!($value instanceof $this->collectionClassType)) {
             // Object
-            if(is_object($value)) {
+            if (is_object($value)) {
                 $type = get_class($value);
             } // Scalar type
             else {

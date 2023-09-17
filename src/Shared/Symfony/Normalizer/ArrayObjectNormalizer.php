@@ -6,7 +6,6 @@ namespace App\Shared\Symfony\Normalizer;
 
 use App\Shared\Domain\Model\ArrayObject;
 use App\Shared\Exception\InvalidCollectionParameterException;
-use App\Shared\Exception\InvalidConstructorArgumentsParameterException;
 use Closure;
 use ReflectionClass;
 use ReflectionException;
@@ -14,7 +13,6 @@ use ReflectionMethod;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
-use Symfony\Component\Serializer\Exception\MissingConstructorArgumentsException;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use function array_key_exists;
 use function is_object;
@@ -32,7 +30,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->objectClassResolver = ($objectClassResolver ?? static fn ($class) => is_object($class) ? $class::class : $class)(...);
+        $this->objectClassResolver = ($objectClassResolver ?? static fn($class) => is_object($class) ? $class::class : $class)(...);
         parent::__construct();
     }
 
@@ -47,6 +45,25 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
             '*' => null, // Supports any other types, but the result is not cacheable
             ArrayObject::class => true, // Supports ArrayObject and result is cacheable
         ];
+    }
+
+    /**
+     * @param mixed $data
+     * @param string $type
+     * @param string|null $format
+     * @param array $context
+     * @return ArrayObject
+     * @throws InvalidCollectionParameterException
+     */
+    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ArrayObject
+    {
+        /** @var ArrayObject $list */
+        $list = new $type;
+        foreach ($data as $element) {
+            $response = parent::denormalize($element, $list->getCollectionClassType(), $format, $context);
+            $list->append($response);
+        }
+        return $list;
     }
 
     /**
@@ -156,24 +173,5 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
         } catch (NoSuchPropertyException) {
             // Properties not found are ignored
         }
-    }
-
-    /**
-     * @param mixed $data
-     * @param string $type
-     * @param string|null $format
-     * @param array $context
-     * @return ArrayObject
-     * @throws InvalidCollectionParameterException
-     */
-    public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ArrayObject
-    {
-        /** @var ArrayObject $list */
-        $list = new $type;
-        foreach ($data as $element) {
-            $response = parent::denormalize($element, $list->getCollectionClassType(), $format, $context);
-            $list->append($response);
-        }
-        return $list;
     }
 }

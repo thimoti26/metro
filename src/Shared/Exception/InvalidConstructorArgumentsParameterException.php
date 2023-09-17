@@ -9,9 +9,9 @@ use RuntimeException as RuntimeExceptionAlias;
 class InvalidConstructorArgumentsParameterException extends RuntimeExceptionAlias
 {
     /** @var string */
-    const MESSAGE   = 'Cannot create an instance of "%s" from serialized data because its constructor requires the following parameters to be present : "%s".';
+    const MESSAGE = 'Cannot create an instance of "%s" from serialized data because its constructor requires the following parameters to be present : "%s".';
     /** @var int */
-    const CODE      = 0;
+    const CODE = 0;
 
     /**
      * @param string $objectName

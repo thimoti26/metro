@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-  <entity name="App\ImportBoundedContext\Domain\Model\Connexion\Connexion" table="connexion" repository-class="App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository">
-    <indexes>
-      <index name="IDX_ACF9FF645A438E76" columns="ligne_id"/>
-      <index name="IDX_ACF9FF64AE02FE4B" columns="depart_id"/>
-      <index name="IDX_ACF9FF64F4028648" columns="arrive_id"/>
-    </indexes>
-    <id name="id" type="connexion_id_value_object" column="id">
-      <generator strategy="IDENTITY"/>
-    </id>
-    <many-to-one field="ligne" target-entity="App\ImportBoundedContext\Domain\Model\Ligne\Ligne" fetch="LAZY">
-      <join-columns>
-        <join-column name="ligne_id" referenced-column-name="id" nullable="false"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="depart" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
-      <join-columns>
-        <join-column name="depart_id" referenced-column-name="id" nullable="false"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="arrive" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
-      <join-columns>
-        <join-column name="arrive_id" referenced-column-name="id" nullable="false"/>
-      </join-columns>
-    </many-to-one>
-  </entity>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\ImportBoundedContext\Domain\Model\Connexion\Connexion" table="connexion"
+            repository-class="App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository">
+        <indexes>
+            <index name="IDX_ACF9FF645A438E76" columns="ligne_id"/>
+            <index name="IDX_ACF9FF64AE02FE4B" columns="depart_id"/>
+            <index name="IDX_ACF9FF64F4028648" columns="arrive_id"/>
+        </indexes>
+        <id name="id" type="connexion_id_value_object" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <many-to-one field="ligne" target-entity="App\ImportBoundedContext\Domain\Model\Ligne\Ligne" fetch="LAZY">
+            <join-columns>
+                <join-column name="ligne_id" referenced-column-name="id" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="depart" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
+            <join-columns>
+                <join-column name="depart_id" referenced-column-name="id" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+        <many-to-one field="arrive" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
+            <join-columns>
+                <join-column name="arrive_id" referenced-column-name="id" nullable="false"/>
+            </join-columns>
+        </many-to-one>
+    </entity>
 </doctrine-mapping>

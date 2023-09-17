@@ -53,6 +53,17 @@ class LigneRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param Ligne $ligne
+     * @return Ligne
+     */
+    public function persist(Ligne $ligne): Ligne
+    {
+        $this->getEntityManager()->persist($ligne);
+        $this->getEntityManager()->flush();
+        return $ligne;
+    }
+
+    /**
      * @return LigneArrayObject
      * @throws InvalidCollectionParameterException
      */
@@ -64,16 +75,5 @@ class LigneRepository extends ServiceEntityRepository
             $ligneArrayObject->append($ligne);
         }
         return $ligneArrayObject;
-    }
-
-    /**
-     * @param Ligne $ligne
-     * @return Ligne
-     */
-    public function persist(Ligne $ligne): Ligne
-    {
-        $this->getEntityManager()->persist($ligne);
-        $this->getEntityManager()->flush();
-        return $ligne;
     }
 }

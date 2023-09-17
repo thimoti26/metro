@@ -40,9 +40,9 @@ class GetAllController extends AbstractController
      */
     public function __invoke(): Response
     {
-        $gareQuery       = new FindGareByFileNameQuery(new FileNameValueObject('Resources/gares.csv'));
-        $ligneQuery      = new FindLigneByFileNameQuery(new FileNameValueObject('Resources/lignes.csv'));
-        $connexionQuery  = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
+        $gareQuery = new FindGareByFileNameQuery(new FileNameValueObject('Resources/gares.csv'));
+        $ligneQuery = new FindLigneByFileNameQuery(new FileNameValueObject('Resources/lignes.csv'));
+        $connexionQuery = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
 
 
         $gares = $this->handle($gareQuery);

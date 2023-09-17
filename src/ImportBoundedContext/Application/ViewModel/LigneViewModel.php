@@ -6,8 +6,8 @@ namespace App\ImportBoundedContext\Application\ViewModel;
 
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 class LigneViewModel extends Ligne
 {

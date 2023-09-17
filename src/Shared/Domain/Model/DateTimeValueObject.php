@@ -24,7 +24,7 @@ abstract class DateTimeValueObject implements ValueObject
      */
     public function __toString()
     {
-        return (string) $this->value->format('Y-m-d H:i:s');
+        return (string)$this->value->format('Y-m-d H:i:s');
     }
 
     /**

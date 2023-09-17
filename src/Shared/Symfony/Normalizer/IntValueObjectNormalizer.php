@@ -22,6 +22,7 @@ final class IntValueObjectNormalizer extends ValueObjectNormalizer
             IntValueObject::class => true, // Supports ValueObject and result is cacheable
         ];
     }
+
     /**
      * {@inheritdoc}
      */

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Shared\Symfony\Normalizer;
 
-use App\Shared\Domain\Model\IntValueObject;
-use App\Shared\Domain\Model\StringValueObject;
 use Closure;
 use ReflectionClass;
 use ReflectionException;
@@ -33,7 +31,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->objectClassResolver = ($objectClassResolver ?? static fn ($class) => is_object($class) ? $class::class : $class)(...);
+        $this->objectClassResolver = ($objectClassResolver ?? static fn($class) => is_object($class) ? $class::class : $class)(...);
         parent::__construct();
     }
 
@@ -49,7 +47,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
     {
         if (stdClass::class === $object::class) {
-            return array_keys((array) $object);
+            return array_keys((array)$object);
         }
 
         // If not using groups, detect manually

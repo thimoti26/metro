@@ -31,7 +31,7 @@ class ImportCommand extends Command
      * @param Serializer $serializer
      */
     public function __construct(
-        MessageBusInterface $messageBus,
+        MessageBusInterface         $messageBus,
         private readonly Serializer $serializer
     )
     {
@@ -42,9 +42,9 @@ class ImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $gareQuery       = new FindGareByFileNameQuery(new FileNameValueObject('Resources/gares.csv'));
-        $ligneQuery      = new FindLigneByFileNameQuery(new FileNameValueObject('Resources/lignes.csv'));
-        $connexionQuery  = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
+        $gareQuery = new FindGareByFileNameQuery(new FileNameValueObject('Resources/gares.csv'));
+        $ligneQuery = new FindLigneByFileNameQuery(new FileNameValueObject('Resources/lignes.csv'));
+        $connexionQuery = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
 
 
         $this->handle($gareQuery);

@@ -6,8 +6,8 @@ namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
-use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
+use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class GetConnexionController extends AbstractController
      * @param SerializerInterface $serializer
      */
     public function __construct(
-        MessageBusInterface $messageBus,
+        MessageBusInterface                  $messageBus,
         private readonly SerializerInterface $serializer
     )
     {

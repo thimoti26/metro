@@ -10,7 +10,6 @@ use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Infrastructure\Orm\Repository\LigneRepository;
 use App\Shared\Exception\InvalidCollectionParameterException;
-use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
 {

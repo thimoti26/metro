@@ -16,6 +16,7 @@ interface GareDatabaseDaoInterface extends Dao
      * @return void
      */
     public function reset(): void;
+
     /**
      * @param GareArrayObject $gareArrayObject
      * @return GareArrayObject

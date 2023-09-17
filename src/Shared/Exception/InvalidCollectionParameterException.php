@@ -9,9 +9,9 @@ use Exception;
 class InvalidCollectionParameterException extends Exception
 {
     /** @var string */
-    const MESSAGE   = 'Unable to apprend object of type %s, instance of %s required.';
+    const MESSAGE = 'Unable to apprend object of type %s, instance of %s required.';
     /** @var int */
-    const CODE      = 0;
+    const CODE = 0;
 
     /**
      * @param string $type

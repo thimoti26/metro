@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace App\Shared\Symfony\Serializer;
+
 use App\Shared\Exception\InvalidConstructorArgumentsParameterException;
 use App\Shared\Symfony\Normalizer\ArrayObjectNormalizer;
 use App\Shared\Symfony\Normalizer\DateTimeNormalizer;
