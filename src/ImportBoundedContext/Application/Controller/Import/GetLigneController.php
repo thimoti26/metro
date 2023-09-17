@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistLigneArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
@@ -57,6 +58,8 @@ class GetLigneController extends AbstractController
     {
         $lignes = $this->handle(new FindLigneByFileNameQuery(new FileNameValueObject($filePath)));
 
-        return JsonResponse::fromJsonString($lignes);
+        $this->handle(new PersistLigneArrayCommand($lignes));
+
+        return JsonResponse::fromJsonString($this->serializer->serialize($lignes, 'json'));
     }
 }

@@ -8,15 +8,16 @@ namespace App\ImportBoundedContext\Infrastructure\Orm\Repository;
 
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
+use App\Shared\Exception\InvalidCollectionParameterException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
 /**
  * @extends ServiceEntityRepository<Ligne>
  *
  * @method Ligne|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ligne|null findOneBy(array $criteria, array $orderBy = null)
- * @method Ligne[]    findAll()
- * @method Ligne[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LigneArrayObject findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LigneRepository extends ServiceEntityRepository
 {
@@ -48,6 +49,20 @@ class LigneRepository extends ServiceEntityRepository
             $this->getEntityManager()->persist($ligne);
         }
         $this->getEntityManager()->flush();
+        return $ligneArrayObject;
+    }
+
+    /**
+     * @return LigneArrayObject
+     * @throws InvalidCollectionParameterException
+     */
+    public function findAll(): LigneArrayObject
+    {
+        $lignes = parent::findAll();
+        $ligneArrayObject = new LigneArrayObject();
+        foreach ($lignes as $ligne) {
+            $ligneArrayObject->append($ligne);
+        }
         return $ligneArrayObject;
     }
 

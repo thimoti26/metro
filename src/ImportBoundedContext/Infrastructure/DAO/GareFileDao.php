@@ -33,10 +33,10 @@ readonly class GareFileDao implements GareFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): GareArrayObject
     {
         try {
-        $fp = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+        $fileData = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }
-        return $this->serializer->deserialize($fp, GareArrayObject::class, 'csv', ['csv_delimiter' => ';']);
+        return $this->serializer->deserialize($fileData, GareArrayObject::class, 'csv', ['csv_delimiter' => ';']);
     }
 }

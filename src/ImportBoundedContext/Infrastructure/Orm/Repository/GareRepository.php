@@ -6,6 +6,7 @@ namespace App\ImportBoundedContext\Infrastructure\Orm\Repository;
 
 use App\ImportBoundedContext\Domain\Model\Gare\Gare;
 use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
+use App\Shared\Exception\InvalidCollectionParameterException;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,8 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Gare|null find($id, $lockMode = null, $lockVersion = null)
  * @method Gare|null findOneBy(array $criteria, array $orderBy = null)
- * @method Gare[]    findAll()
- * @method Gare[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method GareArrayObject findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GareRepository extends ServiceEntityRepository
 {
@@ -50,6 +50,20 @@ class GareRepository extends ServiceEntityRepository
             $this->getEntityManager()->persist($gare);
         }
         $this->getEntityManager()->flush();
+        return $gareArrayObject;
+    }
+
+    /**
+     * @return GareArrayObject
+     * @throws InvalidCollectionParameterException
+     */
+    public function findAll(): GareArrayObject
+    {
+        $gares = parent::findAll();
+        $gareArrayObject = new GareArrayObject();
+        foreach ($gares as $gare) {
+            $gareArrayObject->append($gare);
+        }
         return $gareArrayObject;
     }
 

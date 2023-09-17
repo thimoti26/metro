@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\ViewModel;
 
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
+use App\ImportBoundedContext\Model\Model\Connexion\ConnexionArrayObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 

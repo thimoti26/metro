@@ -5,28 +5,26 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Domain\Model\Connexion;
 
 use App\ImportBoundedContext\Domain\Model\Gare\Gare;
-use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
-use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 
 class Connexion
 {
     /** @var ConnexionIdValueObject|null */
     protected ?ConnexionIdValueObject $id;
-    /** @var LigneIdValueObject */
-    protected LigneIdValueObject $ligne;
-    /** @var GareIdValueObject */
-    protected GareIdValueObject $depart;
-    /** @var GareIdValueObject */
-    protected GareIdValueObject $arrive;
+    /** @var Ligne */
+    protected Ligne $ligne;
+    /** @var Gare */
+    protected Gare $depart;
+    /** @var Gare */
+    protected Gare $arrive;
 
     /**
      * @param ConnexionIdValueObject|null $id
-     * @param LigneIdValueObject $ligne
-     * @param GareIdValueObject $depart
-     * @param GareIdValueObject $arrive
+     * @param Ligne $ligne
+     * @param Gare $depart
+     * @param Gare $arrive
      */
-    public function __construct(?ConnexionIdValueObject $id, LigneIdValueObject $ligne, GareIdValueObject $depart, GareIdValueObject $arrive)
+    public function __construct(?ConnexionIdValueObject $id, Ligne $ligne, Gare $depart, Gare $arrive)
     {
         $this->id = $id;
         $this->ligne = $ligne;
@@ -43,25 +41,25 @@ class Connexion
     }
 
     /**
-     * @return LigneIdValueObject
+     * @return Ligne
      */
-    public function getLigne(): LigneIdValueObject
+    public function getLigne(): Ligne
     {
         return $this->ligne;
     }
 
     /**
-     * @return GareIdValueObject
+     * @return Gare
      */
-    public function getDepart(): GareIdValueObject
+    public function getDepart(): Gare
     {
         return $this->depart;
     }
 
     /**
-     * @return GareIdValueObject
+     * @return Gare
      */
-    public function getArrive(): GareIdValueObject
+    public function getArrive(): Gare
     {
         return $this->arrive;
     }

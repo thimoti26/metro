@@ -33,10 +33,10 @@ readonly class LigneFileDao implements LigneFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): LigneArrayObject
     {
         try {
-        $fp = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
+        $fileData = file_get_contents($this->kernel->getProjectDir().'/Resources/'.$fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
             throw new FileNotFoundException();
         }
-        return $this->serializer->deserialize($fp, LigneArrayObject::class, 'csv', ['csv_delimiter' => ';']);
+        return $this->serializer->deserialize($fileData, LigneArrayObject::class, 'csv', ['csv_delimiter' => ';']);
     }
 }

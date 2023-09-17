@@ -26,6 +26,7 @@ final class PersistLigneCollectionHandler extends QueryHandler
     public function __invoke(PersistLigneArrayCommand $ligneArrayCommand): LigneArrayObject
     {
         $lignes = $ligneArrayCommand->getLignes();
+        $this->ligneDao->reset();
         return $this->ligneDao->persistCollection($lignes);
     }
 }

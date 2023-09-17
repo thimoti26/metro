@@ -5,25 +5,30 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Infrastructure\DAO;
 
 use App\ImportBoundedContext\Domain\Dao\ConnexionDatabaseDaoInterface;
+use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
+use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\Connexion;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionIdValueObject;
-use App\ImportBoundedContext\Domain\Model\Gare\GareIdValueObject;
-use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Infrastructure\Orm\Repository\ConnexionRepository;
-use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface
 {
     /**
-     * @param ConnexionRepository $connexionEntityRepository
-     * @param SerializerInterface $serializer
+     * @param ConnexionRepository $connexionRepository
      */
     public function __construct(
-        private ConnexionRepository $connexionEntityRepository,
-        private SerializerInterface $serializer
+        private ConnexionRepository $connexionRepository
     )
     {
+    }
+
+    /**
+     * @return void
+     */
+    public function reset(): void
+    {
+        $this->connexionRepository->reset();
     }
 
     /**
@@ -32,8 +37,7 @@ readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface
      */
     public function persistCollection(ConnexionArrayObject $connexionArrayObject): ConnexionArrayObject
     {
-        // TODO: Implement persistCollection() method.
-        return $connexionArrayObject;
+        return $this->connexionRepository->persistCollection($connexionArrayObject);
     }
 
     /**
@@ -42,7 +46,6 @@ readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface
      */
     public function findOneById(ConnexionIdValueObject $connexionIdValueObject): Connexion
     {
-        // TODO: Implement findOneById() method.
         return new Connexion($connexionIdValueObject, new LigneIdValueObject("1"), new GareIdValueObject("a"), new GareIdValueObject("a"));
     }
 
@@ -52,7 +55,6 @@ readonly class ConnexionDatabaseDao implements ConnexionDatabaseDaoInterface
      */
     public function persist(Connexion $connexion): Connexion
     {
-        // TODO: Implement persist() method.
-        return $connexion;
+        return $this->connexionRepository->persist($connexion);
     }
 }

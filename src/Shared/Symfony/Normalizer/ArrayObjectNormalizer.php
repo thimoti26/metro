@@ -171,11 +171,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
         /** @var ArrayObject $list */
         $list = new $type;
         foreach ($data as $element) {
-            try {
-                $response = parent::denormalize($element, $list->getCollectionClassType(), $format, $context);
-            } catch (MissingConstructorArgumentsException $e) {
-                throw new InvalidConstructorArgumentsParameterException($type, $e->getMissingConstructorArguments());
-            }
+            $response = parent::denormalize($element, $list->getCollectionClassType(), $format, $context);
             $list->append($response);
         }
         return $list;

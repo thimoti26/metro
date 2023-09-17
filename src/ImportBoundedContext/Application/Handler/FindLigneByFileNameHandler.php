@@ -9,7 +9,6 @@ use App\ImportBoundedContext\Domain\Dao\LigneFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
 use App\Shared\Application\CQRS\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsMessageHandler]
 final class FindLigneByFileNameHandler extends QueryHandler

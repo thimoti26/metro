@@ -9,19 +9,26 @@ use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
 use App\ImportBoundedContext\Domain\Model\Ligne\LigneIdValueObject;
 use App\ImportBoundedContext\Infrastructure\Orm\Repository\LigneRepository;
+use App\Shared\Exception\InvalidCollectionParameterException;
 use Symfony\Component\Serializer\SerializerInterface;
 
 readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
 {
     /**
-     * @param LigneRepository $ligneEntityRepository
-     * @param SerializerInterface $serializer
+     * @param LigneRepository $ligneRepository
      */
     public function __construct(
-        private LigneRepository     $ligneEntityRepository,
-        private SerializerInterface $serializer
+        private LigneRepository $ligneRepository
     )
     {
+    }
+
+    /**
+     * @return void
+     */
+    public function reset(): void
+    {
+        $this->ligneRepository->reset();
     }
 
     /**
@@ -30,7 +37,7 @@ readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
      */
     public function persistCollection(LigneArrayObject $ligneArrayObject): LigneArrayObject
     {
-        // TODO: Implement persistCollection() method.
+        $this->ligneRepository->persistCollection($ligneArrayObject);
         return $ligneArrayObject;
     }
 
@@ -40,8 +47,25 @@ readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
      */
     public function findOneById(LigneIdValueObject $ligneIdValueObject): Ligne
     {
-        // TODO: Implement findOneById() method.
-        return new Ligne($ligneIdValueObject, 'nom', 2, 2, 'bleu');
+        return $this->ligneRepository->findOneById($ligneIdValueObject->getValue());
+    }
+
+    /**
+     * @param string $name
+     * @return Ligne
+     */
+    public function findOneByNom(string $name): Ligne
+    {
+        return $this->ligneRepository->findOneByNom($name);
+    }
+
+    /**
+     * @return LigneArrayObject
+     * @throws InvalidCollectionParameterException
+     */
+    public function findAll(): LigneArrayObject
+    {
+        return $this->ligneRepository->findAll();
     }
 
     /**

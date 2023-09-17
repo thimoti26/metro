@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
+use App\ImportBoundedContext\Application\Handler\PersistGareCollectionHandler;
+use App\ImportBoundedContext\Application\Handler\PersistLigneCollectionHandler;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -44,9 +45,13 @@ class GetAllController extends AbstractController
         $connexionQuery  = new FindConnexionByFileNameQuery(new FileNameValueObject('Resources/connexions.csv'));
 
 
-        $this->handle($gareQuery);
-        $this->handle($ligneQuery);
-        $this->handle($connexionQuery);
+        $gares = $this->handle($gareQuery);
+        $lignes = $this->handle($ligneQuery);
+        $connexions = $this->handle($connexionQuery);
+
+        $this->handle(new PersistGareCollectionHandler($gares));
+        $this->handle(new PersistLigneCollectionHandler($lignes));
+        $this->handle(new PersistConnexionArrayCommand($connexions));
 
         return new Response();
     }

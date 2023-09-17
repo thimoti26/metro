@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
-use App\ImportBoundedContext\Application\CQRS\Commands\PersistGareArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use Symfony\Component\Serializer\SerializerInterface;
 
 class GetConnexionController extends AbstractController

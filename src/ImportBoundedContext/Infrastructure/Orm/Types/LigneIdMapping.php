@@ -22,7 +22,7 @@ class LigneIdMapping extends Type
         return new LigneIdValueObject($value);
     }
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): string
+    public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /** @var LigneIdValueObject $value */
         return $value->getValue();

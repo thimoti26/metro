@@ -9,7 +9,6 @@ use App\ImportBoundedContext\Domain\Dao\ConnexionFileDaoInterface;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\Shared\Application\CQRS\QueryHandler;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsMessageHandler]
 final class FindConnexionByFileNameHandler extends QueryHandler

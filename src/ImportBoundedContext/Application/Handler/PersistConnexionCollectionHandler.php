@@ -26,6 +26,8 @@ final class PersistConnexionCollectionHandler extends QueryHandler
     public function __invoke(PersistConnexionArrayCommand $connexionArrayCommand): ConnexionArrayObject
     {
         $connexions = $connexionArrayCommand->getConnexions();
+        $this->connexionDao->reset();
+
         return $this->connexionDao->persistCollection($connexions);
     }
 }
