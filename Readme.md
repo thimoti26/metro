@@ -83,14 +83,14 @@ src
 │       │           └── ConnexionIdValueObject.php
 │       └── Orm // Interfaçage BDD
 │           ├── Mapping // Fichiers de mapping entre les entités et la bdd
-│           │   ├── Connexion.Connexion.orm.xml
+│           │   ├── Connexion.Connexion.orm.xml //Le nom corresponds à la localisation de l'entité dans le directory Domain/Model
 │           │   ├── Gare.Gare.orm.xml
 │           │   └── Ligne.Ligne.orm.xml
 │           ├── Repository // Classes en charge de communiquer avec la bdd
 │           │   ├── ConnexionRepository.php
 │           │   ├── GareRepository.php
 │           │   └── LigneRepository.php
-│           └── Types // Rajout de nouveaux types de mapping pour gérer les transformations BDD / ViewModèle
+│           └── Types // Rajout de nouveaux types de mapping pour gérer les transformations BDD / Entité (ex : valueObject)
 │               ├── ConnexionIdMapping.php
 │               ├── GareIdMapping.php
 │               └── LigneIdMapping.php
@@ -105,7 +105,7 @@ src
     │       ├── QueryBus.php // Le bus de données (on utilise celui de base pour l'instant)
     │       └── QueryHandler.php // Le bus de données (on utilise celui de base pour l'instant)
     ├── Domain
-    │   └── Model // Pattern des modèles
+    │   └── Model // Pattern des entités de la couche modèle
     │       ├── ArrayObject.php
     │       ├── DateTimeValueObject.php
     │       ├── Entity.php
@@ -131,3 +131,10 @@ src
         └── Serializer
             └── Serializer.php
 ```
+# TODO
+### Archi
+1. Trouver un moyen de regroupper les mappings d'entité communs entre les BC dans le Shared (Ex : id).
+
+### EventListener
+1. Rajouter une EventListener sur l'entrée de la requète afin de serializer la donnée en entrée et de gérer une entité dans le post directement.
+2. Rajouter une EventListener sur la sortie de la requète afin d'encapsuler la donnée dans une API Réponse.
