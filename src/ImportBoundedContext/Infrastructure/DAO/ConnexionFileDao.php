@@ -44,7 +44,7 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
         try {
             $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
         } catch (ErrorException $e) {
-            throw new FileNotFoundException();
+            throw new FileNotFoundException($fileNameValueObject);
         }
         /** @var ConnexionArrayObject $data */
         $datasInfra = $this->serializer->deserialize($fileData, ConnexionArrayInfra::class, 'csv', ['csv_delimiter' => ';']);

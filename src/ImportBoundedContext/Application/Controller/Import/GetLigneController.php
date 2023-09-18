@@ -17,7 +17,6 @@ use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
-
 class GetLigneController extends AbstractController
 {
     use HandleTrait;
