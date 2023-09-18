@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\ImportBoundedContext\Domain\Model\Ligne;
 
-class Ligne
+use App\Shared\Domain\Model\Entity;
+
+class Ligne implements Entity
 {
     /** @var LigneIdValueObject|null */
     protected ?LigneIdValueObject $id;

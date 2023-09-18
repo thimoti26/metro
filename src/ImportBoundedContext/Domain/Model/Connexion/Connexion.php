@@ -6,8 +6,9 @@ namespace App\ImportBoundedContext\Domain\Model\Connexion;
 
 use App\ImportBoundedContext\Domain\Model\Gare\Gare;
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
+use App\Shared\Domain\Model\Entity;
 
-class Connexion
+class Connexion implements Entity
 {
     /** @var ConnexionIdValueObject|null */
     protected ?ConnexionIdValueObject $id;
