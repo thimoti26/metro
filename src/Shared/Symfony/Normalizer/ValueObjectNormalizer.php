@@ -28,6 +28,9 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     /** @var Closure */
     private readonly Closure $objectClassResolver;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
@@ -36,8 +39,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param string|null $format
-     * @return array
+     * {@inheritdoc}
      */
     abstract public function getSupportedTypes(?string $format): array;
 
@@ -108,11 +110,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param object $object
-     * @param string $attribute
-     * @param string|null $format
-     * @param array $context
-     * @return mixed
+     * {@inheritdoc}
      */
     protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = []): mixed
     {
@@ -129,12 +127,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param object $object
-     * @param string $attribute
-     * @param mixed $value
-     * @param string|null $format
-     * @param array $context
-     * @return void
+     * {@inheritdoc}
      */
     protected function setAttributeValue(object $object, string $attribute, mixed $value, string $format = null, array $context = []): void
     {
@@ -146,10 +139,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param string|object $classOrObject
-     * @param array $context
-     * @param bool $attributesAsString
-     * @return array|bool
+     * {@inheritdoc}
      */
     protected function getAllowedAttributes(string|object $classOrObject, array $context, bool $attributesAsString = false): array|bool
     {

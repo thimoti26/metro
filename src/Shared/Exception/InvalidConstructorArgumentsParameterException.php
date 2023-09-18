@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Exception;
 
-use RuntimeException as RuntimeExceptionAlias;
+use RuntimeException;
 
-class InvalidConstructorArgumentsParameterException extends RuntimeExceptionAlias
+class InvalidConstructorArgumentsParameterException extends RuntimeException
 {
     /** @var string */
     const MESSAGE = 'Cannot create an instance of "%s" from serialized data because its constructor requires the following parameters to be present : "%s".';
@@ -15,8 +15,7 @@ class InvalidConstructorArgumentsParameterException extends RuntimeExceptionAlia
 
     /**
      * @param string $objectName
-     * @param array $argumentsConstructor
-     * @param array $argumentsProvided
+     * @param array $argumentsMissing
      */
     public function __construct(string $objectName, array $argumentsMissing)
     {

@@ -30,16 +30,26 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
         self::TIMEZONE_KEY => null,
     );
 
+    /**
+     * @param array $defaultContext
+     */
     public function __construct(array $defaultContext = [])
     {
         $this->setDefaultContext($defaultContext);
     }
 
+    /**
+     * @param array $defaultContext
+     * @return void
+     */
     public function setDefaultContext(array $defaultContext): void
     {
         $this->defaultContext = array_merge($this->defaultContext, $defaultContext);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getSupportedTypes(?string $format): array
     {
         return ['object' => __CLASS__ === DateTimeNormalizer::class];

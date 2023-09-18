@@ -27,6 +27,9 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     /** @var Closure */
     private readonly Closure $objectClassResolver;
 
+    /**
+     * {@inheritdoc}
+     */
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
@@ -35,8 +38,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param string|null $format
-     * @return array
+     * {@inheritdoc}
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -48,12 +50,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param mixed $data
-     * @param string $type
-     * @param string|null $format
-     * @param array $context
-     * @return ArrayObject
-     * @throws InvalidCollectionParameterException
+     * {@inheritdoc}
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ArrayObject
     {
@@ -67,11 +64,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param object $object
-     * @param string|null $format
-     * @param array $context
-     * @return array|string[]
-     * @throws ReflectionException
+     * {@inheritdoc}
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
     {
@@ -138,11 +131,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param object $object
-     * @param string $attribute
-     * @param string|null $format
-     * @param array $context
-     * @return mixed|string|null
+     * {@inheritdoc}
      */
     protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = []): mixed
     {
@@ -159,12 +148,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * @param object $object
-     * @param string $attribute
-     * @param mixed $value
-     * @param string|null $format
-     * @param array $context
-     * @return void
+     * {@inheritdoc}
      */
     protected function setAttributeValue(object $object, string $attribute, mixed $value, string $format = null, array $context = []): void
     {

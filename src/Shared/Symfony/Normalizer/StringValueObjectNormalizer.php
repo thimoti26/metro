@@ -11,8 +11,7 @@ final class StringValueObjectNormalizer extends ValueObjectNormalizer
 {
 
     /**
-     * @param string|null $format
-     * @return array
+     * {@inheritdoc}
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -28,17 +27,12 @@ final class StringValueObjectNormalizer extends ValueObjectNormalizer
      */
     public function normalize(mixed $object, string $format = null, array $context = []): string
     {
-        //TODO : Sépearer en IntValueObject et StringValueObject
         $attribute = $this->getAttributes($object, $format, $context)[0];
         return $this->getAttributeValue($object, $attribute, $format);
     }
 
     /**
-     * @param mixed $data
-     * @param string $type
-     * @param string|null $format
-     * @param array $context
-     * @return StringValueObject
+     * {@inheritdoc}
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): StringValueObject
     {
