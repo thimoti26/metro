@@ -39,7 +39,7 @@ class GetGareController extends AbstractController
      *     name="filePath",
      *     in="path",
      *      @OA\Schema(
-     *          type="string"
+     *
      *      ),
      *     example="gares.csv",
      *     description="gare file path."

@@ -39,7 +39,7 @@ class GetLigneController extends AbstractController
      *     name="filePath",
      *     in="path",
      *      @OA\Schema(
-     *          type="string"
+     *
      *      ),
      *     example="lignes.csv",
      *     description="ligne file path."

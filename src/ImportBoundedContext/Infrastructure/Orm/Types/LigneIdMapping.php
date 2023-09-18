@@ -12,25 +12,36 @@ use Doctrine\DBAL\Types\Type;
 class LigneIdMapping extends Type
 {
 
+    /**
+     * @inheritDoc
+     */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getIntegerTypeDeclarationSQL($column);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform): LigneIdValueObject
     {
         return new LigneIdValueObject($value);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /** @var LigneIdValueObject $value */
         return $value->getValue();
     }
 
-    public function getName()
+    /**
+     * @inheritDoc
+     */
+    public function getName(): int
     {
         return ParameterType::INTEGER;
-        // TODO: Implement getName() method.
     }
 }

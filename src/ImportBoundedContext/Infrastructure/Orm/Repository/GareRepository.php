@@ -46,7 +46,7 @@ class GareRepository extends ServiceEntityRepository
     public function persistCollection(GareArrayObject $gareArrayObject): GareArrayObject
     {
         /** @var Gare $gare */
-        foreach ($gareArrayObject as &$gare) {
+        foreach ($gareArrayObject as $gare) {
             $this->getEntityManager()->persist($gare);
         }
         $this->getEntityManager()->flush();

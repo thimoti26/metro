@@ -45,7 +45,7 @@ class LigneRepository extends ServiceEntityRepository
     public function persistCollection(LigneArrayObject $ligneArrayObject): LigneArrayObject
     {
         /** @var Ligne $ligne */
-        foreach ($ligneArrayObject as &$ligne) {
+        foreach ($ligneArrayObject as $ligne) {
             $this->getEntityManager()->persist($ligne);
         }
         $this->getEntityManager()->flush();

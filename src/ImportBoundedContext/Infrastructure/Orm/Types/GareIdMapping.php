@@ -11,25 +11,36 @@ use Doctrine\DBAL\Types\Type;
 
 class GareIdMapping extends Type
 {
+    /**
+     * @inheritDoc
+     */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getIntegerTypeDeclarationSQL($column);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform): GareIdValueObject
     {
         return new GareIdValueObject($value);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /** @var GareIdValueObject $value */
         return $value->getValue();
     }
 
-    public function getName()
+    /**
+     * @inheritDoc
+     */
+    public function getName(): int
     {
         return ParameterType::INTEGER;
-        // TODO: Implement getName() method.
     }
 }

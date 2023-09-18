@@ -7,14 +7,14 @@
         <id name="id" type="ligne_id_value_object" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="nom" type="string" column="name" length="255" nullable="false">
+        <field name="nom" column="name" length="255">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="vitesse" type="float" column="speed" precision="10" scale="0" nullable="false"/>
-        <field name="intervalle" type="float" column="spacing" precision="10" scale="0" nullable="false"/>
-        <field name="couleur" type="string" column="color" length="255" nullable="false">
+        <field name="vitesse" type="float" column="speed" precision="10" scale="0"/>
+        <field name="intervalle" type="float" column="spacing" precision="10" scale="0"/>
+        <field name="couleur" column="color" length="255">
             <options>
                 <option name="fixed"/>
             </options>

@@ -12,29 +12,35 @@ use Doctrine\DBAL\Types\Type;
 class ConnexionIdMapping extends Type
 {
     /**
-     * @param array $column
-     * @param AbstractPlatform $platform
-     * @return string
+     * @inheritDoc
      */
     public function getSQLDeclaration(array $column, AbstractPlatform $platform): string
     {
         return $platform->getIntegerTypeDeclarationSQL($column);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToPHPValue($value, AbstractPlatform $platform): ConnexionIdValueObject
     {
         return new ConnexionIdValueObject($value);
     }
 
+    /**
+     * @inheritDoc
+     */
     public function convertToDatabaseValue($value, AbstractPlatform $platform): int
     {
         /** @var ConnexionIdValueObject $value */
         return $value->getValue();
     }
 
-    public function getName()
+    /**
+     * @inheritDoc
+     */
+    public function getName(): int
     {
         return ParameterType::INTEGER;
-        // TODO: Implement getName() method.
     }
 }

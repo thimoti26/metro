@@ -6,8 +6,8 @@ namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
-use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
+use App\ImportBoundedContext\Application\ViewModel\ConnexionArrayViewModel;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,7 +39,7 @@ class GetConnexionController extends AbstractController
      *     name="filePath",
      *     in="path",
      *      @OA\Schema(
-     *          type="string"
+     *
      *      ),
      *     example="connexions.csv",
      *     description="connexion file path."
@@ -47,7 +47,7 @@ class GetConnexionController extends AbstractController
      * @OA\Response(
      *     response=200,
      *     description="test",
-     *     @Model(type=ConnexionArrayObject::class)
+     *     @Model(type=ConnexionArrayViewModel::class)
      * )
      *
      * @param string $filePath
@@ -58,7 +58,7 @@ class GetConnexionController extends AbstractController
         $connexions = $this->handle(new FindConnexionByFileNameQuery(new FileNameValueObject($filePath)));
 
         $this->handle(new PersistConnexionArrayCommand($connexions));
-
+//        return $connexions;
         return JsonResponse::fromJsonString($this->serializer->serialize($connexions, 'json'));
     }
 }

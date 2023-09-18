@@ -20,9 +20,9 @@ abstract class StringValueObject implements ValueObject
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return (string)$this->value;
+        return $this->value;
     }
 
     /**

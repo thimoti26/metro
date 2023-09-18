@@ -16,7 +16,7 @@ class ConnexionViewModel extends Connexion
     /**
      * @Groups({"default"})
      * @Model(type=ConnexionIdViewModel::class)
-     * @var ConnexionIdValueObject|null
+     * @var ConnexionIdViewModel|null
      */
     protected ?ConnexionIdValueObject $id;
     /**

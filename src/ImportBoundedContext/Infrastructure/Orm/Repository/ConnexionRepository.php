@@ -43,7 +43,7 @@ class ConnexionRepository extends ServiceEntityRepository
     public function persistCollection(ConnexionArrayObject $connexionArrayObject): ConnexionArrayObject
     {
         /** @var Connexion $connexion */
-        foreach ($connexionArrayObject as &$connexion) {
+        foreach ($connexionArrayObject as $connexion) {
             $this->getEntityManager()->persist($connexion);
         }
         $this->getEntityManager()->flush();

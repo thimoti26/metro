@@ -8,7 +8,6 @@ use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQue
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
-use App\ImportBoundedContext\Model\Model\Connexion\ConnexionArrayObject;
 use App\Shared\Symfony\Serializer\Serializer;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

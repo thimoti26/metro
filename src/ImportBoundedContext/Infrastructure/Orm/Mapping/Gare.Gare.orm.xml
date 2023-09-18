@@ -7,12 +7,12 @@
         <id name="id" type="gare_id_value_object" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="nom" type="string" column="name" length="255" nullable="false">
+        <field name="nom" column="name" length="255">
             <options>
                 <option name="fixed"/>
             </options>
         </field>
-        <field name="longitude" type="float" column="longitude" precision="10" scale="0" nullable="false"/>
-        <field name="latitude" type="float" column="latitude" precision="10" scale="0" nullable="false"/>
+        <field name="longitude" type="float" column="longitude" precision="10" scale="0"/>
+        <field name="latitude" type="float" column="latitude" precision="10" scale="0"/>
     </entity>
 </doctrine-mapping>

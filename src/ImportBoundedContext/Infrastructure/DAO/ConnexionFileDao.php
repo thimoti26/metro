@@ -13,7 +13,6 @@ use App\ImportBoundedContext\Infrastructure\Exception\FileNotFoundException;
 use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\Connexion as ConnexionInfra;
 use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\ConnexionArrayObject as ConnexionArrayInfra;
 use App\Shared\Exception\InvalidCollectionParameterException;
-use ErrorException;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -41,9 +40,8 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
      */
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): ConnexionArrayObject
     {
-        try {
-            $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
-        } catch (ErrorException $e) {
+        $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
+        if (false === $fileData) {
             throw new FileNotFoundException($fileNameValueObject);
         }
         /** @var ConnexionArrayObject $data */

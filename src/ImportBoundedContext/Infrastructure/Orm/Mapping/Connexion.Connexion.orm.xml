@@ -12,19 +12,19 @@
         <id name="id" type="connexion_id_value_object" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <many-to-one field="ligne" target-entity="App\ImportBoundedContext\Domain\Model\Ligne\Ligne" fetch="LAZY">
+        <many-to-one field="ligne" target-entity="App\ImportBoundedContext\Domain\Model\Ligne\Ligne">
             <join-columns>
-                <join-column name="ligne_id" referenced-column-name="id" nullable="false"/>
+                <join-column name="ligne_id"/>
             </join-columns>
         </many-to-one>
-        <many-to-one field="depart" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
+        <many-to-one field="depart" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare">
             <join-columns>
-                <join-column name="depart_id" referenced-column-name="id" nullable="false"/>
+                <join-column name="depart_id"/>
             </join-columns>
         </many-to-one>
-        <many-to-one field="arrive" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare" fetch="LAZY">
+        <many-to-one field="arrive" target-entity="App\ImportBoundedContext\Domain\Model\Gare\Gare">
             <join-columns>
-                <join-column name="arrive_id" referenced-column-name="id" nullable="false"/>
+                <join-column name="arrive_id"/>
             </join-columns>
         </many-to-one>
     </entity>

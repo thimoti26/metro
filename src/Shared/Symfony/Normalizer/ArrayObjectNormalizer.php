@@ -51,6 +51,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
 
     /**
      * {@inheritdoc}
+     * @throws InvalidCollectionParameterException
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ArrayObject
     {
@@ -65,6 +66,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
 
     /**
      * {@inheritdoc}
+     * @throws ReflectionException
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
     {
