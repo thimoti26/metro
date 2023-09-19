@@ -25,5 +25,8 @@ services:
             $serializer: '@App\Shared\Symfony\Serializer\Serializer'
             $dataCollector: '@serializer.data_collector'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Shared\Symfony\Transport\MqttTransportFactory:
+        tags: [messenger.transport_factory]
+        arguments:
+            $topics: ['/topic1','/topic2']
+            $clientId: '%env(MQTT_CLIENT_ID)%'

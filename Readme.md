@@ -1,4 +1,4 @@
-### Architecture
+# Architecture
 
 ```scala
 src
@@ -131,6 +131,8 @@ src
         └── Serializer
             └── Serializer.php
 ```
+
+
 # TODO
 ### Archi
 1. Trouver un moyen de regroupper les mappings d'entité communs entre les BC dans le Shared (Ex : id).

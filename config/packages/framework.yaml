@@ -4,6 +4,14 @@ framework:
     #csrf_protection: true
     http_method_override: false
 
+    messenger:
+        transports:
+            mqtt: '%env(MESSENGER_MQTT_TRANSPORT_DSN)%'
+
+        routing:
+            # Route your messages to the transports
+            '*': mqtt
+
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:

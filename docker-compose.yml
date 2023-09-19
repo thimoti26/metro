@@ -26,6 +26,18 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
+  mosquitto:
+    restart: on-failure
+    image: eclipse-mosquitto:2.0.17
+    container_name: mosquitto
+    expose:
+      - 1883
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./Resources/config_mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./Resources/config_mosquitto/.mosquitto:/mosquitto/config/.mosquitto:r
+
 volumes:
   mysql_data:
   tmp:

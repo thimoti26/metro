@@ -17,3 +17,7 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###>mqtt ###
+/Resources/config_mosquitto/.mosquitto
+###<mqtt ###

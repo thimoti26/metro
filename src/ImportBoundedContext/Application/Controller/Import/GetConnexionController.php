@@ -6,8 +6,8 @@ namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
-use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\ImportBoundedContext\Application\ViewModel\ConnexionArrayViewModel;
+use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
