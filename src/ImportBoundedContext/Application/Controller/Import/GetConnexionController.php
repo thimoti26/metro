@@ -8,11 +8,11 @@ use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayComm
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\ImportBoundedContext\Application\ViewModel\ConnexionArrayViewModel;
+use App\Shared\Domain\Response\ApiResponse;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
+use App\Shared\Symfony\Controller\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -58,7 +58,10 @@ class GetConnexionController extends AbstractController
         $connexions = $this->handle(new FindConnexionByFileNameQuery(new FileNameValueObject($filePath)));
 
         $this->handle(new PersistConnexionArrayCommand($connexions));
-//        return $connexions;
-        return JsonResponse::fromJsonString($this->serializer->serialize($connexions, 'json'));
+
+        return new Response(
+            new ApiResponse(0, 'test', $connexions),
+            $this->serializer
+        );
     }
 }
