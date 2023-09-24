@@ -55,7 +55,12 @@ readonly class GareDatabaseDao implements GareDatabaseDaoInterface
      */
     public function findAll(): GareArrayObject
     {
-        return $this->gareRepository->findAll();
+        $gares = $this->gareRepository->findAll();
+        $gareArrayObject = new GareArrayObject();
+        foreach ($gares as $gare) {
+            $gareArrayObject->append($gare);
+        }
+        return $gareArrayObject;
     }
 
     /**

@@ -6,6 +6,7 @@ namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
+use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\ImportBoundedContext\Application\ViewModel\ConnexionArrayViewModel;
 use App\Shared\Domain\Response\ApiResponse;
@@ -51,7 +52,7 @@ class GetConnexionController extends AbstractController
      * )
      *
      * @param string $filePath
-     * @return Response
+     * @return Response<ApiResponse<ConnexionArrayObject>>
      */
     public function __invoke(string $filePath): Response
     {

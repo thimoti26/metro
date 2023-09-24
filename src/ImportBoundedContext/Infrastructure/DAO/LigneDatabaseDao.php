@@ -64,7 +64,12 @@ readonly class LigneDatabaseDao implements LigneDatabaseDaoInterface
      */
     public function findAll(): LigneArrayObject
     {
-        return $this->ligneRepository->findAll();
+        $lignes = $this->ligneRepository->findAll();
+        $ligneArrayObject = new LigneArrayObject();
+        foreach ($lignes as $ligne) {
+            $ligneArrayObject->append($ligne);
+        }
+        return $ligneArrayObject;
     }
 
     /**

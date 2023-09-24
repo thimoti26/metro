@@ -15,6 +15,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Gare|null find($id, $lockMode = null, $lockVersion = null)
  * @method Gare|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Gare|null findOneById(int $id)
+ * @method Gare|null findOneByNom(string $nom)
  * @method GareArrayObject findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GareRepository extends ServiceEntityRepository
@@ -62,19 +64,5 @@ class GareRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($gare);
         $this->getEntityManager()->flush();
         return $gare;
-    }
-
-    /**
-     * @return GareArrayObject
-     * @throws InvalidCollectionParameterException
-     */
-    public function findAll(): GareArrayObject
-    {
-        $gares = parent::findAll();
-        $gareArrayObject = new GareArrayObject();
-        foreach ($gares as $gare) {
-            $gareArrayObject->append($gare);
-        }
-        return $gareArrayObject;
     }
 }

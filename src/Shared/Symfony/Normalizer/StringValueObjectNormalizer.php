@@ -9,9 +9,9 @@ use App\Shared\Domain\Model\StringValueObject;
 
 final class StringValueObjectNormalizer extends ValueObjectNormalizer
 {
-
     /**
-     * {@inheritdoc}
+     * @param string|null $format
+     * @return array<class-string|'*'|'object'|string, bool|null>
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -23,7 +23,10 @@ final class StringValueObjectNormalizer extends ValueObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $object
+     * @param string|null $format
+     * @param array<string> $context
+     * @return string
      */
     public function normalize(mixed $object, string $format = null, array $context = []): string
     {
@@ -32,11 +35,15 @@ final class StringValueObjectNormalizer extends ValueObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
+     * @param string $type
+     * @param string|null $format
+     * @param array<string> $context
+     * @return StringValueObject
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): StringValueObject
     {
-        /** @var StringValueObject $element */
+        /** @var StringValueObject $type */
         return new $type($data);
     }
 }

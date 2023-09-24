@@ -13,10 +13,20 @@ use ReflectionMethod;
 use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
+use Symfony\Component\Serializer\Exception\BadMethodCallException;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Exception\ExtraAttributesException;
+use Symfony\Component\Serializer\Exception\InvalidArgumentException;
+use Symfony\Component\Serializer\Exception\LogicException;
+use Symfony\Component\Serializer\Exception\RuntimeException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use function array_key_exists;
 use function is_object;
 
+/**
+ * @template T
+ */
 class ArrayObjectNormalizer extends AbstractObjectNormalizer
 {
     protected PropertyAccessor $propertyAccessor;
@@ -33,12 +43,12 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->objectClassResolver = ($objectClassResolver ?? static fn($class) => is_object($class) ? $class::class : $class)(...);
+        $this->objectClassResolver = (static fn($class) => is_object($class) ? $class::class : $class)(...);
         parent::__construct();
     }
 
     /**
-     * {@inheritdoc}
+     * @return array<class-string|'*'|'object'|string, bool|null>
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -50,12 +60,25 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data Data to restore
+     * @param string $type The expected class to instantiate
+     * @param string|null $format Format the given data was extracted from
+     * @param array<string> $context Options available to the denormalizer
+     *
+     * @return ArrayObject<T>
+     *
+     * @throws BadMethodCallException   Occurs when the normalizer is not called in an expected context
+     * @throws InvalidArgumentException Occurs when the arguments are not coherent or not supported
+     * @throws UnexpectedValueException Occurs when the item cannot be hydrated with the given data
+     * @throws ExtraAttributesException Occurs when the item doesn't have attribute to receive given data
+     * @throws LogicException           Occurs when the normalizer is not supposed to denormalize
+     * @throws RuntimeException         Occurs if the class cannot be instantiated
+     * @throws ExceptionInterface       Occurs for all the other cases of errors
      * @throws InvalidCollectionParameterException
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): ArrayObject
     {
-        /** @var ArrayObject $list */
+        /** @var ArrayObject<T> $list */
         $list = new $type;
         foreach ($data as $element) {
             $response = parent::denormalize($element, $list->getCollectionClassType(), $format, $context);
@@ -65,7 +88,11 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param object $object
+     * @param string|null $format
+     * @param array<string> $context
+     *
+     * @return array<int<0, max>, array<int, string>>
      * @throws ReflectionException
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
@@ -133,7 +160,11 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param object $object
+     * @param string $attribute
+     * @param string|null $format
+     * @param array<string> $context
+     * @return mixed
      */
     protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = []): mixed
     {
@@ -150,7 +181,12 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param object $object
+     * @param string $attribute
+     * @param mixed $value
+     * @param string|null $format
+     * @param array<string> $context
+     * @return void
      */
     protected function setAttributeValue(object $object, string $attribute, mixed $value, string $format = null, array $context = []): void
     {

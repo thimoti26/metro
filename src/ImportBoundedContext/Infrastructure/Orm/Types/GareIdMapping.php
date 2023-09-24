@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Type;
 
 class GareIdMapping extends Type
 {
+    const NAME = 'gare_id_value_object';
     /**
      * @inheritDoc
      */
@@ -39,8 +40,8 @@ class GareIdMapping extends Type
     /**
      * @inheritDoc
      */
-    public function getName(): int
+    public function getName(): string
     {
-        return ParameterType::INTEGER;
+        return self::NAME;
     }
 }

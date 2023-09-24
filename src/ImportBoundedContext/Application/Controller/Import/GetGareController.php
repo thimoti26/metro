@@ -8,11 +8,13 @@ use App\ImportBoundedContext\Application\CQRS\Commands\PersistGareArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Application\ViewModel\GareArrayViewModel;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
+use App\ImportBoundedContext\Domain\Model\Gare\GareArrayObject;
+use App\Shared\Domain\Response\ApiResponse;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use App\Shared\Symfony\Controller\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -51,7 +53,7 @@ class GetGareController extends AbstractController
      * )
      *
      * @param string $filePath
-     * @return Response
+     * @return Response<ApiResponse<GareArrayObject>>
      */
     public function __invoke(string $filePath): Response
     {
@@ -59,6 +61,9 @@ class GetGareController extends AbstractController
 
         $this->handle(new PersistGareArrayCommand($gares));
 
-        return JsonResponse::fromJsonString($this->serializer->serialize($gares, 'json'));
+        return new Response(
+            new ApiResponse(0, 'test', $gares),
+            $this->serializer
+        );
     }
 }

@@ -27,11 +27,9 @@ class ImportCommand extends Command
 
     /**
      * @param MessageBusInterface $messageBus
-     * @param Serializer $serializer
      */
     public function __construct(
-        MessageBusInterface         $messageBus,
-        private readonly Serializer $serializer
+        MessageBusInterface         $messageBus
     )
     {
         $this->messageBus = $messageBus;

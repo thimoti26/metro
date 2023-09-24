@@ -11,7 +11,8 @@ final class IntValueObjectNormalizer extends ValueObjectNormalizer
 {
 
     /**
-     * {@inheritdoc}
+     * @param string|null $format
+     * @return array<class-string|'*'|'object'|string, bool|null>
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -23,7 +24,10 @@ final class IntValueObjectNormalizer extends ValueObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $object
+     * @param string|null $format
+     * @param array<string> $context
+     * @return int
      */
     public function normalize(mixed $object, string $format = null, array $context = []): int
     {
@@ -32,11 +36,15 @@ final class IntValueObjectNormalizer extends ValueObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
+     * @param string $type
+     * @param string|null $format
+     * @param array<string> $context
+     * @return IntValueObject
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): IntValueObject
     {
-        /** @var IntValueObject $element */
+        /** @var IntValueObject $data */
         return new $type($data);
     }
 }

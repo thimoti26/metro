@@ -29,4 +29,9 @@ interface ConnexionDatabaseDaoInterface extends Dao
      * @return Connexion
      */
     public function persist(Connexion $connexion): Connexion;
+
+    /**
+     * @return void
+     */
+    public function reset(): void;
 }

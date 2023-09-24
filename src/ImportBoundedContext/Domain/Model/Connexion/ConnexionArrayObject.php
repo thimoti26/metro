@@ -7,9 +7,12 @@ namespace App\ImportBoundedContext\Domain\Model\Connexion;
 use App\Shared\Domain\Model\ArrayObject;
 use App\Shared\Exception\InvalidCollectionParameterException;
 
+/**
+ * @extends ArrayObject<Connexion>
+ */
 class ConnexionArrayObject extends ArrayObject
 {
-    /** @var string */
+    /** @inheritDoc */
     protected string $collectionClassType = Connexion::class;
 
     /**

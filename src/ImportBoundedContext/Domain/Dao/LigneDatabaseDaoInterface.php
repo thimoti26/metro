@@ -29,4 +29,9 @@ interface LigneDatabaseDaoInterface extends Dao
      * @return Ligne
      */
     public function persist(Ligne $ligne): Ligne;
+
+    /**
+     * @return void
+     */
+    public function reset(): void;
 }

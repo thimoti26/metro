@@ -7,6 +7,9 @@ namespace App\ImportBoundedContext\Domain\Model\Gare;
 use App\Shared\Domain\Model\ArrayObject;
 use App\Shared\Exception\InvalidCollectionParameterException;
 
+/**
+ * @extends ArrayObject<Gare>
+ */
 class GareArrayObject extends ArrayObject
 {
     /** @var string */

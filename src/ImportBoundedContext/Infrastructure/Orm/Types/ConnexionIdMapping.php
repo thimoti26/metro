@@ -11,6 +11,7 @@ use Doctrine\DBAL\Types\Type;
 
 class ConnexionIdMapping extends Type
 {
+    const NAME = 'connexion_id_value_object';
     /**
      * @inheritDoc
      */
@@ -39,8 +40,8 @@ class ConnexionIdMapping extends Type
     /**
      * @inheritDoc
      */
-    public function getName(): int
+    public function getName(): string
     {
-        return ParameterType::INTEGER;
+        return self::NAME;
     }
 }

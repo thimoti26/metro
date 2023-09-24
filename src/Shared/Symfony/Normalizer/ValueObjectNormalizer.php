@@ -13,6 +13,7 @@ use Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 use Symfony\Component\Serializer\Mapping\AttributeMetadata;
+use Symfony\Component\Serializer\Mapping\AttributeMetadataInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
 use function array_key_exists;
 use function is_object;
@@ -39,11 +40,17 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|null $format
+     * @return array<string, bool|null>
      */
     abstract public function getSupportedTypes(?string $format): array;
 
     /**
+     * @param object $object
+     * @param string|null $format
+     * @param array<string> $context
+     *
+     * @return array<string>
      * @throws ReflectionException
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
@@ -110,7 +117,11 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param object $object
+     * @param string $attribute
+     * @param string|null $format
+     * @param array<string> $context
+     * @return mixed
      */
     protected function getAttributeValue(object $object, string $attribute, string $format = null, array $context = []): mixed
     {
@@ -127,7 +138,12 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param object $object
+     * @param string $attribute
+     * @param mixed $value
+     * @param string|null $format
+     * @param array<string> $context
+     * @return void
      */
     protected function setAttributeValue(object $object, string $attribute, mixed $value, string $format = null, array $context = []): void
     {
@@ -139,7 +155,10 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|object $classOrObject
+     * @param array $context
+     * @param bool $attributesAsString
+     * @return array|bool|string[]|AttributeMetadataInterface[]
      */
     protected function getAllowedAttributes(string|object $classOrObject, array $context, bool $attributesAsString = false): array|bool
     {

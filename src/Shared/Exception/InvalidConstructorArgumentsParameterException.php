@@ -15,7 +15,7 @@ class InvalidConstructorArgumentsParameterException extends RuntimeException
 
     /**
      * @param string $objectName
-     * @param array $argumentsMissing
+     * @param array<string> $argumentsMissing
      */
     public function __construct(string $objectName, array $argumentsMissing)
     {

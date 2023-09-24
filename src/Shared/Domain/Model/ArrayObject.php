@@ -9,6 +9,10 @@ use ArrayObject as BaseArrayObject;
 use Iterator;
 use OpenApi\Annotations as OA;
 
+/**
+ * @template T
+ * @extends BaseArrayObject<int, T>
+ */
 abstract class ArrayObject extends BaseArrayObject
 {
     /**
@@ -17,7 +21,7 @@ abstract class ArrayObject extends BaseArrayObject
     protected string $collectionClassType;
 
     /**
-     * @return string
+     * @return class-string<T>
      */
     public function getCollectionClassType(): string
     {
@@ -26,7 +30,7 @@ abstract class ArrayObject extends BaseArrayObject
 
     /**
      * @OA\Property(type="")
-     * @return array
+     * @return array<T>
      */
     public function getArrayCopy(): array
     {
@@ -45,7 +49,7 @@ abstract class ArrayObject extends BaseArrayObject
 
     /**
      * Enforce collection type
-     * @param mixed $value
+     * @param T $value
      * @return void
      * @throws InvalidCollectionParameterException
      */

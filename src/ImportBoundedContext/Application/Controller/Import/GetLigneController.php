@@ -8,11 +8,13 @@ use App\ImportBoundedContext\Application\CQRS\Commands\PersistLigneArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
 use App\ImportBoundedContext\Application\ViewModel\LigneArrayViewModel;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
+use App\ImportBoundedContext\Domain\Model\Ligne\LigneArrayObject;
+use App\Shared\Domain\Response\ApiResponse;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Annotations as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+use App\Shared\Symfony\Controller\Response;
 use Symfony\Component\Messenger\HandleTrait;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -51,7 +53,7 @@ class GetLigneController extends AbstractController
      * )
      *
      * @param string $filePath
-     * @return Response
+     * @return Response<ApiResponse<LigneArrayObject>>
      */
     public function __invoke(string $filePath): Response
     {
@@ -59,6 +61,8 @@ class GetLigneController extends AbstractController
 
         $this->handle(new PersistLigneArrayCommand($lignes));
 
-        return JsonResponse::fromJsonString($this->serializer->serialize($lignes, 'json'));
-    }
+        return new Response(
+            new ApiResponse(0, 'test', $lignes),
+            $this->serializer
+        );    }
 }

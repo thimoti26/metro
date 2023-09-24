@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\Type;
 
 class LigneIdMapping extends Type
 {
-
+    const NAME = 'ligne_id_value_object';
     /**
      * @inheritDoc
      */
@@ -40,8 +40,8 @@ class LigneIdMapping extends Type
     /**
      * @inheritDoc
      */
-    public function getName(): int
+    public function getName(): string
     {
-        return ParameterType::INTEGER;
+        return self::NAME;
     }
 }

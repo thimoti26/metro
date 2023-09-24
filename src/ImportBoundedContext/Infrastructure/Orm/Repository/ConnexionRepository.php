@@ -14,6 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Connexion|null find($id, $lockMode = null, $lockVersion = null)
  * @method Connexion|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Connexion|null findOneById(int $id)
  * @method Connexion[]    findAll()
  * @method Connexion[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */

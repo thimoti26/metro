@@ -8,6 +8,9 @@ use App\ImportBoundedContext\Domain\Model\Gare\Gare;
 use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\Shared\Domain\Model\Entity;
 
+/**
+ * @implements Entity<Connexion>
+ */
 class Connexion implements Entity
 {
     /** @var ConnexionIdValueObject|null */

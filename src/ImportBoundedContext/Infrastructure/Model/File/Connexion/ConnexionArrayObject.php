@@ -7,6 +7,9 @@ namespace App\ImportBoundedContext\Infrastructure\Model\File\Connexion;
 use App\Shared\Domain\Model\ArrayObject;
 use App\Shared\Exception\InvalidCollectionParameterException;
 
+/**
+ * @extends ArrayObject<Connexion>
+ */
 class ConnexionArrayObject extends ArrayObject
 {
     /** @var string */

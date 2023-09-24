@@ -17,6 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Ligne|null find($id, $lockMode = null, $lockVersion = null)
  * @method Ligne|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Ligne|null findOneById(int $id)
+ * @method Ligne|null findOneByNom(string $nom)
  * @method LigneArrayObject findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class LigneRepository extends ServiceEntityRepository
@@ -61,19 +63,5 @@ class LigneRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($ligne);
         $this->getEntityManager()->flush();
         return $ligne;
-    }
-
-    /**
-     * @return LigneArrayObject
-     * @throws InvalidCollectionParameterException
-     */
-    public function findAll(): LigneArrayObject
-    {
-        $lignes = parent::findAll();
-        $ligneArrayObject = new LigneArrayObject();
-        foreach ($lignes as $ligne) {
-            $ligneArrayObject->append($ligne);
-        }
-        return $ligneArrayObject;
     }
 }

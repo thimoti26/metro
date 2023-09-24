@@ -43,7 +43,11 @@ class Serializer extends BaseSerializer
     }
 
     /**
-     * @inheritDoc
+     * @param mixed $data
+     * @param string $type
+     * @param string|null $format
+     * @param array<string> $context
+     * @return mixed
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {

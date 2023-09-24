@@ -9,6 +9,7 @@ use App\ImportBoundedContext\Domain\Model\Connexion\Connexion;
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionArrayObject;
 use App\ImportBoundedContext\Domain\Model\File\FileNameValueObject;
 use App\ImportBoundedContext\Domain\Model\Gare\Gare;
+use App\ImportBoundedContext\Domain\Model\Ligne\Ligne;
 use App\ImportBoundedContext\Infrastructure\Exception\FileNotFoundException;
 use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\Connexion as ConnexionInfra;
 use App\ImportBoundedContext\Infrastructure\Model\File\Connexion\ConnexionArrayObject as ConnexionArrayInfra;
@@ -44,7 +45,7 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
         if (false === $fileData) {
             throw new FileNotFoundException($fileNameValueObject);
         }
-        /** @var ConnexionArrayObject $data */
+        /** @var ConnexionArrayInfra $datasInfra */
         $datasInfra = $this->serializer->deserialize($fileData, ConnexionArrayInfra::class, 'csv', ['csv_delimiter' => ';']);
 
         $connexions = new ConnexionArrayObject();
@@ -58,7 +59,7 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
             $departFound = false;
             $arrriveFound = false;
             $ligneFound = false;
-            /** @var Gare $gare */
+            /** @var Ligne $ligne */
             foreach ($lignes as $ligne) {
                 if ($ligne->getNom() === $dataInfra->getLigne()) {
                     $ligneFound = $ligne;

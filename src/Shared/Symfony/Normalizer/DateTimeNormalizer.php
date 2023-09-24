@@ -25,13 +25,17 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
         DateTimeImmutable::class => true,
         DateTime::class => true,
     ];
+
+    /**
+     * @var array<?string>
+     */
     private array $defaultContext = array(
         self::FORMAT_KEY => DateTimeInterface::RFC3339,
         self::TIMEZONE_KEY => null,
     );
 
     /**
-     * @param array $defaultContext
+     * @param array<string> $defaultContext
      */
     public function __construct(array $defaultContext = [])
     {
@@ -39,7 +43,7 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * @param array $defaultContext
+     * @param array<string> $defaultContext
      * @return void
      */
     public function setDefaultContext(array $defaultContext): void
@@ -48,7 +52,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|null $format
+     * @return array<bool>
      */
     public function getSupportedTypes(?string $format): array
     {
@@ -56,9 +61,11 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
-     * @throws InvalidArgumentException|Exception
+     * @param mixed $object
+     * @param string|null $format
+     * @param array<string> $context
+     * @return string
+     * @throws Exception
      */
     public function normalize(mixed $object, string $format = null, array $context = []): string
     {
@@ -71,14 +78,16 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
 
         if (null !== $timezone) {
             $object = clone $object;
-            $object = $object->setTimezone($timezone);
+            if (property_exists($object, 'setTimezone')) {
+                $object = $object->setTimezone($timezone);
+            }
         }
 
         return $object->format($dateTimeFormat);
     }
 
     /**
-     * @param array $context
+     * @param array<string> $context
      * @return DateTimeZone|null
      * @throws Exception
      */
@@ -94,7 +103,10 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
+     * @param string|null $format
+     * @param array<string> $context
+     * @return bool
      */
     public function supportsNormalization(mixed $data, string $format = null, array $context = []): bool
     {
@@ -102,11 +114,12 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
+     * @param $data
+     * @param string $type
+     * @param string|null $format
+     * @param array<string> $context
      * @return DateTimeInterface
-     *
-     * @throws NotNormalizableValueException|Exception
+     * @throws Exception
      */
     public function denormalize($data, string $type, string $format = null, array $context = []): DateTimeInterface
     {
@@ -157,9 +170,8 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * Formats datetime errors.
-     *
-     * @return string[]
+     * @param array<string> $errors
+     * @return array<string>
      */
     private function formatDateTimeErrors(array $errors): array
     {
@@ -173,7 +185,10 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
+     * @param string $type
+     * @param string|null $format
+     * @return bool
      */
     public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {

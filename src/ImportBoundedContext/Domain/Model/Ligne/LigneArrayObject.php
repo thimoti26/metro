@@ -7,6 +7,9 @@ namespace App\ImportBoundedContext\Domain\Model\Ligne;
 use App\Shared\Domain\Model\ArrayObject;
 use App\Shared\Exception\InvalidCollectionParameterException;
 
+/**
+ * @extends ArrayObject<Ligne>
+ */
 class LigneArrayObject extends ArrayObject
 {
     /** @var string */
