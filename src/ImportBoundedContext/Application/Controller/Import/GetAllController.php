@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Application\Controller\Import;
 
 use App\ImportBoundedContext\Application\CQRS\Commands\PersistConnexionArrayCommand;
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistGareArrayCommand;
+use App\ImportBoundedContext\Application\CQRS\Commands\PersistLigneArrayCommand;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindConnexionByFileNameQuery;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindGareByFileNameQuery;
 use App\ImportBoundedContext\Application\CQRS\Queries\FindLigneByFileNameQuery;
@@ -49,8 +51,8 @@ class GetAllController extends AbstractController
         $lignes = $this->handle($ligneQuery);
         $connexions = $this->handle($connexionQuery);
 
-        $this->handle(new PersistGareCollectionHandler($gares));
-        $this->handle(new PersistLigneCollectionHandler($lignes));
+        $this->handle(new PersistGareArrayCommand($gares));
+        $this->handle(new PersistLigneArrayCommand($lignes));
         $this->handle(new PersistConnexionArrayCommand($connexions));
 
         return new Response();
