@@ -44,9 +44,11 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
         if (false === $fileData) {
             throw new FileNotFoundException($fileNameValueObject);
         }
+
+        $connexions = new ConnexionArrayObject();
+
         /** @var ConnexionArrayInfra $datasInfra */
         $datasInfra = $this->serializer->deserialize($fileData, ConnexionArrayInfra::class, 'csv', ['csv_delimiter' => ';']);
-
 
         $gares = $this->gareDatabaseDao->findAll();
 
