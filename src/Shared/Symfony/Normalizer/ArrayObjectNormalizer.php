@@ -92,7 +92,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
      * @param string|null $format
      * @param array<string> $context
      *
-     * @return array<int<0, max>, array<int, string>>
+     * @return array<string>
      * @throws ReflectionException
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array

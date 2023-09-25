@@ -78,7 +78,7 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
 
         if (null !== $timezone) {
             $object = clone $object;
-            if (property_exists($object, 'setTimezone')) {
+            if (($object instanceof DateTime) || ($object instanceof DateTimeImmutable)) {
                 $object = $object->setTimezone($timezone);
             }
         }

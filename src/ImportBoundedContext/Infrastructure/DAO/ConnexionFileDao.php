@@ -22,14 +22,12 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
     /**
      * @param SerializerInterface $serializer
      * @param KernelInterface $kernel
-     * @param LigneDatabaseDao $ligneDatabaseDao
-     * @param GareDatabaseDao $gareDatabaseDao
      */
     public function __construct(
         private SerializerInterface $serializer,
         private KernelInterface     $kernel,
-        private LigneDatabaseDao    $ligneDatabaseDao,
-        private GareDatabaseDao     $gareDatabaseDao
+        private GareDatabaseDao     $gareDatabaseDao,
+        private LigneDatabaseDao    $ligneDatabaseDao
     )
     {
     }
@@ -42,13 +40,13 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
     public function findAllByFileName(FileNameValueObject $fileNameValueObject): ConnexionArrayObject
     {
         $fileData = file_get_contents($this->kernel->getProjectDir() . '/Resources/' . $fileNameValueObject->getValue(), true);
+
         if (false === $fileData) {
             throw new FileNotFoundException($fileNameValueObject);
         }
         /** @var ConnexionArrayInfra $datasInfra */
         $datasInfra = $this->serializer->deserialize($fileData, ConnexionArrayInfra::class, 'csv', ['csv_delimiter' => ';']);
 
-        $connexions = new ConnexionArrayObject();
 
         $gares = $this->gareDatabaseDao->findAll();
 
@@ -61,18 +59,18 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
             $ligneFound = false;
             /** @var Ligne $ligne */
             foreach ($lignes as $ligne) {
-                if ($ligne->getNom() === $dataInfra->getLigne()->getNom()) {
+                if ($ligne->getNom() === $dataInfra->getLigne()) {
                     $ligneFound = $ligne;
                     break;
                 }
             }
             /** @var Gare $gare */
             foreach ($gares as $gare) {
-                if ($gare->getNom() === $dataInfra->getDepart()->getNom()) {
+                if ($gare->getNom() === $dataInfra->getDepart()) {
                     $departFound = $gare;
                     continue;
                 }
-                if ($gare->getNom() === $dataInfra->getArrive()->getNom()) {
+                if ($gare->getNom() === $dataInfra->getArrive()) {
                     $arrriveFound = $gare;
                     continue;
                 }

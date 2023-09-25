@@ -35,7 +35,7 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
     public function __construct()
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $this->objectClassResolver = ($objectClassResolver ?? static fn($class) => is_object($class) ? $class::class : $class)(...);
+        $this->objectClassResolver = (static fn($class) => is_object($class) ? $class::class : $class)(...);
         parent::__construct();
     }
 
