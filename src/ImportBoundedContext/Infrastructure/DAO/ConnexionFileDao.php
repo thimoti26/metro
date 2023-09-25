@@ -61,18 +61,18 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
             $ligneFound = false;
             /** @var Ligne $ligne */
             foreach ($lignes as $ligne) {
-                if ($ligne->getNom() === $dataInfra->getLigne()) {
+                if ($ligne->getNom() === $dataInfra->getLigne()->getNom()) {
                     $ligneFound = $ligne;
                     break;
                 }
             }
             /** @var Gare $gare */
             foreach ($gares as $gare) {
-                if ($gare->getNom() === $dataInfra->getDepart()) {
+                if ($gare->getNom() === $dataInfra->getDepart()->getNom()) {
                     $departFound = $gare;
                     continue;
                 }
-                if ($gare->getNom() === $dataInfra->getArrive()) {
+                if ($gare->getNom() === $dataInfra->getArrive()->getNom()) {
                     $arrriveFound = $gare;
                     continue;
                 }
