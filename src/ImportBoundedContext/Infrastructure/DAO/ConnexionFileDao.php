@@ -22,6 +22,8 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
     /**
      * @param SerializerInterface $serializer
      * @param KernelInterface $kernel
+     * @param GareDatabaseDao $gareDatabaseDao
+     * @param LigneDatabaseDao $ligneDatabaseDao
      */
     public function __construct(
         private SerializerInterface $serializer,

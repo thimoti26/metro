@@ -6,9 +6,6 @@ namespace App\ImportBoundedContext\Domain\Model\Ligne;
 
 use App\Shared\Domain\Model\Entity;
 
-/**
- * @implements Entity<Ligne>
- */
 class Ligne implements Entity
 {
     /** @var LigneIdValueObject|null */

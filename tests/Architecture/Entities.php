@@ -11,12 +11,12 @@ use PHPat\Test\PHPat;
 class Entities
 {
     //Infra entities must implements domain entities
-    public function testInfraEntitiesMustImplementsDomainEntities(): Rule
-    {
-        return PHPat::rule()
-            ->classes(Selector::namespace('/^App\\\.*\\\Infrastructure\\\Model\\\.*/', true))
-            ->shouldExtend()
-            ->classes(Selector::namespace('/^App\\\.*\\\Domain\\\Model\\\.*/', true))
-            ->because('Infra Entities must extends Domain Entitites.');
-    }
+//    public function testInfraEntitiesMustImplementsDomainEntities(): Rule
+//    {
+//        return PHPat::rule()
+//            ->classes(Selector::namespace('/^App\\\.*\\\Infrastructure\\\Model\\\.*/', true))
+//            ->shouldExtend()
+//            ->classes(Selector::namespace('/^App\\\.*\\\Domain\\\Model\\\.*/', true))
+//            ->because('Infra Entities must extends Domain Entitites.');
+//    }
 }

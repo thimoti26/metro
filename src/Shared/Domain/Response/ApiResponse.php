@@ -18,7 +18,7 @@ class ApiResponse
     private int $code;
     /** @var string */
     private string $message;
-    /** @var ArrayObject<T>|DateTimeValueObject|Entity<T>|ValueObject */
+    /** @var ArrayObject<T>|DateTimeValueObject|Entity|ValueObject */
     private ArrayObject|DateTimeValueObject|Entity|ValueObject $content;
     /** @var int */
     private int $httpStatusCode;
@@ -28,7 +28,7 @@ class ApiResponse
     /**
      * @param int $code
      * @param string $message
-     * @param ArrayObject<T>|DateTimeValueObject<T>|ValueObject|Entity<T> $content
+     * @param ArrayObject<T>|DateTimeValueObject<T>|ValueObject|Entity $content
      * @param int $httpStatusCode
      * @param array<string> $headers
      */
@@ -58,7 +58,7 @@ class ApiResponse
     }
 
     /**
-     * @return ArrayObject<T>|DateTimeValueObject|Entity<T>|ValueObject
+     * @return ArrayObject<T>|DateTimeValueObject|Entity|ValueObject
      */
     public function getContent(): DateTimeValueObject|Entity|ValueObject|ArrayObject
     {

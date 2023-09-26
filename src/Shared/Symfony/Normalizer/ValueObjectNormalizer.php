@@ -156,9 +156,9 @@ abstract class ValueObjectNormalizer extends AbstractObjectNormalizer
 
     /**
      * @param string|object $classOrObject
-     * @param array $context
+     * @param array<string> $context
      * @param bool $attributesAsString
-     * @return array|bool|string[]|AttributeMetadataInterface[]
+     * @return array<string>|bool|AttributeMetadataInterface[]
      */
     protected function getAllowedAttributes(string|object $classOrObject, array $context, bool $attributesAsString = false): array|bool
     {

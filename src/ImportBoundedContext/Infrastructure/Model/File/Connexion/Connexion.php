@@ -8,8 +8,8 @@ use App\Shared\Domain\Model\Entity;
 
 class Connexion implements Entity
 {
-    /** @var ConnexionIdValueObject */
-    protected ConnexionIdValueObject $id;
+    /** @var ConnexionIdValueObject|null */
+    protected ?ConnexionIdValueObject $id;
     /** @var string */
     protected string $ligne;
     /** @var string */
@@ -18,12 +18,12 @@ class Connexion implements Entity
     protected string $arrive;
 
     /**
-     * @param ConnexionIdValueObject $id
+     * @param ConnexionIdValueObject|null $id
      * @param string $ligne
      * @param string $depart
      * @param string $arrive
      */
-    public function __construct(ConnexionIdValueObject $id, string $ligne, string $depart, string $arrive)
+    public function __construct(?ConnexionIdValueObject $id, string $ligne, string $depart, string $arrive)
     {
         $this->id = $id;
         $this->ligne = $ligne;
@@ -31,7 +31,7 @@ class Connexion implements Entity
         $this->arrive = $arrive;
     }
 
-    public function getId(): ConnexionIdValueObject
+    public function getId(): ConnexionIdValueObject|null
     {
         return $this->id;
     }

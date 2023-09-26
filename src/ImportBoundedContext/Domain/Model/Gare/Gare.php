@@ -6,9 +6,6 @@ namespace App\ImportBoundedContext\Domain\Model\Gare;
 
 use App\Shared\Domain\Model\Entity;
 
-/**
- * @implements Entity<Gare>
- */
 class Gare implements Entity
 {
     /** @var GareIdValueObject|null */

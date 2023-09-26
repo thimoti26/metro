@@ -51,10 +51,10 @@ class Serializer extends BaseSerializer
      */
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): mixed
     {
-        try {
+//        try {
             return parent::denormalize($data, $type, $format, $context);
-        } catch (MissingConstructorArgumentsException $e) {
-            throw new InvalidConstructorArgumentsParameterException($type, $e->getMissingConstructorArguments());
-        }
+//        } catch (MissingConstructorArgumentsException $e) {
+//            throw new InvalidConstructorArgumentsParameterException($type, $e->getMissingConstructorArguments());
+//        }
     }
 }
