@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\ImportBoundedContext\Infrastructure\Orm\Types;
 
 use App\ImportBoundedContext\Domain\Model\Connexion\ConnexionIdValueObject;
-use Doctrine\DBAL\ParameterType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
 

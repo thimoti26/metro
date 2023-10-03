@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\SimulationBoundedContext\Domain\Model\Train\Train" table="train"
+            repository-class="App\SimulationBoundedContext\Infrastructure\Orm\Repository\TrainRepository">
+        <id name="id" type="train_id_value_object" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+        <one-to-one field="ligne" target-entity="App\SimulationBoundedContext\Domain\Model\Ligne\Ligne" />
+        <one-to-one field="gare" target-entity="App\SimulationBoundedContext\Domain\Model\Gare\Gare" />
+    </entity>
+</doctrine-mapping>

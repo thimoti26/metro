@@ -14,6 +14,10 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/ImportBoundedContext/Infrastructure/Orm/Mapping'
                 prefix: 'App\ImportBoundedContext\Domain\Model'
+            SimulationBoundedContext:
+                type: xml
+                dir: '%kernel.project_dir%/src/SimulationBoundedContext/Infrastructure/Orm/Mapping'
+                prefix: 'App\SimulationBoundedContext\Domain\Model'
 #             TestEntity:
 #                 is_bundle: false
 #                 dir: '%kernel.project_dir%/src/Shared/Orm/Entity'

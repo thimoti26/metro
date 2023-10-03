@@ -26,10 +26,10 @@ readonly class ConnexionFileDao implements ConnexionFileDaoInterface
      * @param LigneDatabaseDao $ligneDatabaseDao
      */
     public function __construct(
-        private SerializerInterface $serializer,
-        private KernelInterface     $kernel,
-        private GareDatabaseDao     $gareDatabaseDao,
-        private LigneDatabaseDao    $ligneDatabaseDao
+        private SerializerInterface  $serializer,
+        private KernelInterface      $kernel,
+        private GareDatabaseDao $gareDatabaseDao,
+        private LigneDatabaseDao $ligneDatabaseDao
     )
     {
     }

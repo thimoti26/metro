@@ -26,6 +26,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
 
+  redis:
+    image: redis:7.2
+    container_name: redis
+    volumes:
+      - redis:/data
+
 volumes:
   mysql_data:
   tmp:
+  redis:
