@@ -92,22 +92,26 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
      * @param string|null $format
      * @param array<string> $context
      *
-     * @return array<string>
+     * @return array<int, array<string>>
      * @throws ReflectionException
      */
     protected function extractAttributes(object $object, string $format = null, array $context = []): array
     {
         $elements = [];
+        // $object = ArrayObject -> boucle sur les éléments
         foreach ($object as $data) {
 
-            // If not using groups, detect manually
+            // Si on n'utilise pas les groups, on detectecte manuellement
             $attributes = [];
 
-            // methods
+            // Récupération des méthodes
             $class = ($this->objectClassResolver)($data);
             $reflClass = new ReflectionClass($class);
 
+            // On va boucler sur les méthodes
             foreach ($reflClass->getMethods(ReflectionMethod::IS_PUBLIC) as $reflMethod) {
+                // Si les méthodes n'ont aucun param | est statique | est un constructeur | est un destructeur
+                // -> on passe au suivant
                 if (
                     0 !== $reflMethod->getNumberOfRequiredParameters()
                     || $reflMethod->isStatic()
@@ -120,6 +124,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
                 $name = $reflMethod->name;
                 $attributeName = null;
 
+                //Si c'est un Getter
                 if (str_starts_with($name, 'get') || str_starts_with($name, 'has') || str_starts_with($name, 'can')) {
                     // getters, hassers and canners
                     $attributeName = substr($name, 3);
@@ -127,7 +132,7 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
                     if (!$reflClass->hasProperty($attributeName)) {
                         $attributeName = lcfirst($attributeName);
                     }
-                } elseif (str_starts_with($name, 'is')) {
+                } elseif (str_starts_with($name, 'is')) { //Getter de booleen
                     // issers
                     $attributeName = substr($name, 2);
 
@@ -135,18 +140,20 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
                         $attributeName = lcfirst($attributeName);
                     }
                 }
-
+                // Si on a récupéré un attribut et qu'il est allowed (on ne l'a pas déjà)
                 if (null !== $attributeName && $this->isAllowedAttribute($data, $attributeName, $format, $context)) {
                     $attributes[$attributeName] = true;
                 }
             }
 
-            // properties
+            // On va boucler sur les données membres
             foreach ($reflClass->getProperties() as $reflProperty) {
+                // Si elle n'est pas public -> on continue
                 if (!$reflProperty->isPublic()) {
                     continue;
                 }
 
+                // Si elle et statique ou pas allowed -> on continue
                 if ($reflProperty->isStatic() || !$this->isAllowedAttribute($data, $reflProperty->name, $format, $context)) {
                     continue;
                 }
@@ -154,7 +161,9 @@ class ArrayObjectNormalizer extends AbstractObjectNormalizer
                 $attributes[$reflProperty->name] = true;
             }
 
-            $elements[] = array_keys($attributes);
+            /** @var array<string> $datas */
+            $datas = array_keys($attributes);
+            $elements[] = $datas;
         }
         return $elements;
     }

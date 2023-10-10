@@ -18,8 +18,12 @@ use function is_string;
 
 class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
 {
+    /** @var string */
     public const FORMAT_KEY = 'datetime_format';
+
+    /** @var string */
     public const TIMEZONE_KEY = 'datetime_timezone';
+    /** @var array<bool> */
     private const SUPPORTED_TYPES = [
         DateTimeInterface::class => true,
         DateTimeImmutable::class => true,
@@ -57,7 +61,9 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
      */
     public function getSupportedTypes(?string $format): array
     {
-        return ['object' => __CLASS__ === DateTimeNormalizer::class];
+        return [
+            'object' => __CLASS__ === DateTimeNormalizer::class
+        ];
     }
 
     /**
@@ -188,9 +194,10 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
      * @param mixed $data
      * @param string $type
      * @param string|null $format
+     * @param array<string> $context
      * @return bool
      */
-    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null, array $context = []): bool
     {
         return isset(self::SUPPORTED_TYPES[$type]);
     }
