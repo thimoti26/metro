@@ -23,11 +23,17 @@ class Response extends BaseResponse
         private readonly SerializerInterface $serializer
     )
     {
-        $data = new \stdClass();
-        $data->code = $apiResponse->getCode();
-        $data->message = $apiResponse->getMessage();
-        $data->content = $apiResponse->getContent();
-
-        parent::__construct($this->serializer->serialize($data, 'json'), $apiResponse->getHttpStatusCode(), $apiResponse->getHeaders());
+        if (false === array_key_exists('Content-Type', $apiResponse->getHeaders())) {
+            $headers = $apiResponse->getHeaders();
+            $headers['Content-Type'] = 'application/json; charset=UTF-8';
+            $apiResponse = new ApiResponse(
+                $apiResponse->getCode(),
+                $apiResponse->getMessage(),
+                $apiResponse->getContent(),
+                $apiResponse->getHttpStatusCode(),
+                $headers
+            );
+        }
+        parent::__construct($this->serializer->serialize($apiResponse, 'json'), $apiResponse->getHttpStatusCode(), $apiResponse->getHeaders());
     }
 }
