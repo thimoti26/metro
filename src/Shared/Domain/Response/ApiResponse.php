@@ -18,8 +18,8 @@ class ApiResponse
     private int $code;
     /** @var string */
     private string $message;
-    /** @var ArrayObject<T>|DateTimeValueObject|Entity|ValueObject */
-    private ArrayObject|DateTimeValueObject|Entity|ValueObject $content;
+    /** @var ArrayObject<T>|DateTimeValueObject|Entity|ValueObject|null */
+    private ArrayObject|DateTimeValueObject|Entity|ValueObject|null $content;
     /** @var int */
     private int $httpStatusCode;
     /** @var array<string> */
@@ -28,11 +28,11 @@ class ApiResponse
     /**
      * @param int $code
      * @param string $message
-     * @param ArrayObject<T>|DateTimeValueObject<T>|ValueObject|Entity $content
+     * @param ArrayObject<T>|DateTimeValueObject<T>|ValueObject|Entity|null $content
      * @param int $httpStatusCode
      * @param array<string> $headers
      */
-    public function __construct(int $code, string $message, DateTimeValueObject|Entity|ValueObject|ArrayObject $content, int $httpStatusCode = 200, array $headers = [])
+    public function __construct(int $code, string $message, DateTimeValueObject|Entity|ValueObject|ArrayObject|null $content, int $httpStatusCode = 200, array $headers = [])
     {
         $this->code = $code;
         $this->message = $message;
@@ -58,9 +58,9 @@ class ApiResponse
     }
 
     /**
-     * @return ArrayObject<T>|DateTimeValueObject|Entity|ValueObject
+     * @return ArrayObject<T>|DateTimeValueObject|Entity|ValueObject|null
      */
-    public function getContent(): DateTimeValueObject|Entity|ValueObject|ArrayObject
+    public function getContent(): DateTimeValueObject|Entity|ValueObject|ArrayObject|null
     {
         return $this->content;
     }
