@@ -20,10 +20,13 @@ services:
             - '../src/Shared/Orm/Entity/'
             - '../src/Kernel.php'
 
-    Symfony\Component\Serializer\Debug\TraceableSerializer:
-        arguments:
-            $serializer: '@App\Shared\Symfony\Serializer\Serializer'
-            $dataCollector: '@serializer.data_collector'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    \App\Shared\Symfony\Normalizer\ApiResponseNormalizer:
+        tags: [serializer.normalizer]
+    \App\Shared\Symfony\Normalizer\ArrayObjectNormalizer:
+        tags: [serializer.normalizer]
+    \App\Shared\Symfony\Normalizer\DateTimeNormalizer:
+        tags: [serializer.normalizer]
+    \App\Shared\Symfony\Normalizer\IntValueObjectNormalizer:
+        tags: [serializer.normalizer]
+    \App\Shared\Symfony\Normalizer\StringValueObjectNormalizer:
+        tags: [serializer.normalizer]
