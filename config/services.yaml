@@ -20,13 +20,13 @@ services:
             - '../src/Shared/Orm/Entity/'
             - '../src/Kernel.php'
 
-    \App\Shared\Symfony\Normalizer\ApiResponseNormalizer:
+    App\Shared\Symfony\Normalizer\ApiResponseNormalizer:
         tags: [serializer.normalizer]
-    \App\Shared\Symfony\Normalizer\ArrayObjectNormalizer:
+    App\Shared\Symfony\Normalizer\ArrayObjectNormalizer:
         tags: [serializer.normalizer]
-    \App\Shared\Symfony\Normalizer\DateTimeNormalizer:
+    App\Shared\Symfony\Normalizer\DateTimeNormalizer:
         tags: [serializer.normalizer]
-    \App\Shared\Symfony\Normalizer\IntValueObjectNormalizer:
+    App\Shared\Symfony\Normalizer\IntValueObjectNormalizer:
         tags: [serializer.normalizer]
-    \App\Shared\Symfony\Normalizer\StringValueObjectNormalizer:
+    App\Shared\Symfony\Normalizer\StringValueObjectNormalizer:
         tags: [serializer.normalizer]
