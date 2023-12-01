@@ -11,7 +11,7 @@ use App\Shared\Domain\Model\Entity;
 class Connexion implements Entity
 {
     /** @var ConnexionIdValueObject|null */
-    protected ?ConnexionIdValueObject $id;
+    protected ConnexionIdValueObject|null $id;
     /** @var Ligne */
     protected Ligne $ligne;
     /** @var Gare */
@@ -25,7 +25,7 @@ class Connexion implements Entity
      * @param Gare $depart
      * @param Gare $arrive
      */
-    public function __construct(?ConnexionIdValueObject $id, Ligne $ligne, Gare $depart, Gare $arrive)
+    public function __construct(ConnexionIdValueObject|null $id, Ligne $ligne, Gare $depart, Gare $arrive)
     {
         $this->id = $id;
         $this->ligne = $ligne;
@@ -36,7 +36,7 @@ class Connexion implements Entity
     /**
      * @return ConnexionIdValueObject|null
      */
-    public function getId(): ?ConnexionIdValueObject
+    public function getId(): ConnexionIdValueObject|null
     {
         return $this->id;
     }

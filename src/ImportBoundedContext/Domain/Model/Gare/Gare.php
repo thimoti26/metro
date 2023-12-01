@@ -9,7 +9,7 @@ use App\Shared\Domain\Model\Entity;
 class Gare implements Entity
 {
     /** @var GareIdValueObject|null */
-    protected ?GareIdValueObject $id;
+    protected GareIdValueObject|null $id;
     /** @var string */
     protected string $nom;
     /** @var float */
@@ -23,7 +23,7 @@ class Gare implements Entity
      * @param float $longitude
      * @param float $latitude
      */
-    public function __construct(?GareIdValueObject $id, string $nom, float $longitude, float $latitude)
+    public function __construct(GareIdValueObject|null $id, string $nom, float $longitude, float $latitude)
     {
         $this->id = $id;
         $this->nom = $nom;
@@ -34,7 +34,7 @@ class Gare implements Entity
     /**
      * @return GareIdValueObject|null
      */
-    public function getId(): ?GareIdValueObject
+    public function getId(): GareIdValueObject|null
     {
         return $this->id;
     }
